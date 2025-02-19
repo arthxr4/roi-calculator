@@ -50,23 +50,23 @@ export default function Home() {
 
 
           {/* Sélecteur d'abonnement sous forme de boutons */}
-          <div className="flex gap-4 mb-6 bg-white rounded-lg p-2">
+          <div className="flex gap-4 mb-6 bg-[#FFFFFF] rounded-lg p-2">
             <button
               onClick={() => handleSubscriptionChange(2500)}
-              className={`w-1/2 py-3 rounded-lg text-sm font-semibold  focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
+              className={`w-1/2 py-2 rounded-lg text-sm font-medium  focus:outline-none hover:bg-gray-100 rounded-lg text-sm  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
                 subscription === 2500
                   ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
-                  : "border-gray-300 bg-white"
+                  : "border-gray-300 text-[#71717a]"
               }`}
             >
               Growth
             </button>
             <button
               onClick={() => handleSubscriptionChange(4000)}
-              className={`w-1/2 py-3 rounded-lg text-sm font-semibold focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
+              className={`w-1/2 py-2 rounded-lg text-sm font-medium focus:outline-none hover:bg-gray-100 rounded-lg text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
                 subscription === 4000
-                  ? " bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
-                  : "border-gray-300 bg-white"
+                  ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
+                  : "border-gray-300 text-[#71717a]"
               }`}
             >
               Growth Plus
@@ -153,8 +153,6 @@ export default function Home() {
 
      
 
-      {/* Bouton stylisé avec ShadCN */}
-      <Button variant="default">Clique-moi</Button>
 
           
         </div>

@@ -1,8 +1,15 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+
 import "flowbite";
 import PrelineProvider from "./components/PrelineProvider"; // ✅ Import du composant client
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter", // Variable CSS pour utiliser la police
+  display: "swap", // Permet un chargement plus fluide
+});
 
 
 const geistSans = Geist({

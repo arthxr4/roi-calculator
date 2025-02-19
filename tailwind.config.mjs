@@ -53,10 +53,8 @@ export default {
   			}
   		},
   		fontFamily: {
-  			instrument: [
-  				'Inter',
-  				'sans-serif'
-  			]
+        inter: ["var(--font-inter)", "sans-serif"], // 🔥 Ajoute ici
+  			
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
