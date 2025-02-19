@@ -1,6 +1,18 @@
 "use client";
 import { useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Info } from "lucide-react"; // Icône d'information
+
+
+
 export default function Home() {
   const [subscription, setSubscription] = useState(2500);
   const [appointments, setAppointments] = useState(15);
@@ -26,13 +38,14 @@ export default function Home() {
       <h2 className="text-md text-center font-normal text-gray-700 mb-12 max-w-3xl">
           Quel revenu et quel retour sur investissement pouvez-vous obtenir avec Avelius ? Utilisez notre calculateur pour voir les résultats réels que nous pouvons obtenir pour votre entreprise 👇
           </h2>
-
+          
       <div className="bg-white p-0 rounded-lg shadow-sm w-full max-w-4xl grid grid-cols-[55%_45%] gap-0">
         {/* Partie Gauche - Formulaire */}
         <div className="bg-[#FBFBFB] p-8 rounded-l-lg">
           <h2 className="text-sm font-normal text-gray-500 mb-2">
             Choisissez votre abonnement
           </h2>
+
           
 
 
@@ -61,45 +74,41 @@ export default function Home() {
           </div>
 
           {/* Nombre moyen de RDV par mois */}
-          <label className="block text-sm font-normal text-gray-500">Nombre moyen de rdv par mois</label>
-          <input
-            type="range"
-            min="1"
-            max="50"
-            value={appointments}
-            onChange={(e) => setAppointments(Number(e.target.value))}
-            className="w-full h-1 bg-gray-200 accent-orange-600 appearance-none rounded-lg cursor-pointer"
-          />
-          
+          <label className="block text-sm font-normal text-gray-500 mb-2">Nombre moyen de rdv par mois</label>
+          <Slider
+  defaultValue={[appointments]}
+  min={1}
+  max={50}
+  step={1}
+  onValueChange={(value) => setAppointments(value[0])}
+/>
           
         
           
-          <p className="text-gray-500 text-sm mb-4">{appointments.toLocaleString("fr-FR")} rendez-vous</p>
+          <p className="text-gray-500 text-sm mb-4 mt-1">{appointments.toLocaleString("fr-FR")} rendez-vous</p>
 
           {/* Taux de conversion après RDV */}
-          <label className="block text-sm font-normal text-gray-500">Taux de conversion (%)</label>
-          <input
-            type="range"
-            min="1"
-            max="100"
-            value={closeRate}
-            onChange={(e) => setCloseRate(Number(e.target.value))}
-            className="w-full h-1 bg-gray-200 accent-orange-600 appearance-none rounded-lg cursor-pointer"
-          />
-          <p className="text-gray-500 text-sm mb-4">{closeRate.toLocaleString("fr-FR")}%</p>
+          <label className="block text-sm font-normal text-gray-500 mb-2">Taux de conversion (%)</label>
+          <Slider
+  defaultValue={[closeRate]}
+  min={1}
+  max={100}
+  step={1}
+  onValueChange={(value) => setCloseRate(value[0])}
+/>
+          <p className="text-gray-500 text-sm mb-4 mt-1">{closeRate.toLocaleString("fr-FR")}%</p>
 
           {/* Valeur annuelle du contrat */}
-          <label className="block text-sm font-normal text-gray-500">Valeur annuelle du contrat (€)</label>
-          <input
-            type="range"
-            min="1000"
-            max="500000"
-            step="1000"
-            value={contractValue}
-            onChange={(e) => setContractValue(Number(e.target.value))}
-            className="w-full h-1 bg-gray-200 accent-orange-600 appearance-none rounded-lg cursor-pointer"
-          />
-          <p className="text-gray-500 text-sm mb-4">{contractValue.toLocaleString("fr-FR")} €</p>
+          <label className="block text-sm font-normal text-gray-500 mb-2">Valeur annuelle du contrat (€)</label>
+          <Slider
+         
+  defaultValue={[contractValue]}
+  min={1000}
+  max={500000}
+  step={1000}
+  onValueChange={(value) => setContractValue(value[0])}
+/>
+          <p className="text-gray-500 text-sm mb-4 mt-1">{contractValue.toLocaleString("fr-FR")} €</p>
         </div>
 
         {/* Partie Droite - Résultats avec alignement à gauche et dividers */}
@@ -109,15 +118,45 @@ export default function Home() {
             <p className="text-4xl font-bold text-black">{salesPerYear.toLocaleString("fr-FR")} €</p>
           </div>
 
-          <div className="border-b pb-8 pt-8">
-            <h3 className="text-sm font-normal text-gray-800 mb-1">Votre investissement annuel</h3>
-            <p className="text-4xl font-bold text-black">{investment.toLocaleString("fr-FR")} €</p>
-          </div>
+          {/* Bloc "Votre investissement annuel" avec tooltip */}
+<div className="border-b pb-8 pt-8 items-center justify-between">
+  <h3 className="text-sm font-normal text-gray-800 mb-1 flex items-center">
+    Votre investissement annuel
+    {/* Icône + Tooltip */}
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span className="ml-2">
+            <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
+          </span>
+        </TooltipTrigger>
+        <TooltipContent className=" text-sm p-3 rounded-md shadow-md max-w-[220px] text-left">
+          À noté : Dépends de l’abonnement choisi
+          au tarif public. Les prix peuvent varier en fonction d'offres spécifiques 
+          ou de conditions particulières.
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  </h3>
+
+  {/* Affichage du montant formaté */}
+  <p className="text-4xl font-bold text-black">
+    {investment.toLocaleString("fr-FR")} €
+  </p>
+</div>
+
 
           <div className=" pb-8 pt-8">
             <h3 className="text-sm font-normal text-gray-800 mb-1">Retour sur investissement</h3>
             <p className="text-5xl font-bold text-[#ff5e00]">{roi.toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%</p>
           </div>
+
+     
+
+      {/* Bouton stylisé avec ShadCN */}
+      <Button variant="default">Clique-moi</Button>
+
+          
         </div>
       </div>
     </div>

@@ -1,6 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "flowbite";
+import PrelineProvider from "./components/PrelineProvider"; // ✅ Import du composant client
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,8 +27,8 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-
-
+        <PrelineProvider /> {/* ✅ Charge Preline côté client */}
+        <script src="./assets/vendor/nouislider/dist/nouislider.min.js"></script>
       </body>
     </html>
   );
