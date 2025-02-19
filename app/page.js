@@ -56,7 +56,7 @@ export default function Home() {
           </div>
 
           {/* Nombre moyen de RDV par mois */}
-          <label className="block text-sm font-normal text-gray-700">Nombre moyen de RDV par mois</label>
+          <label className="block text-sm font-normal text-gray-700">Nombre moyen de rdv par mois</label>
           <input
             type="range"
             min="1"
@@ -65,7 +65,7 @@ export default function Home() {
             onChange={(e) => setAppointments(Number(e.target.value))}
             className="w-full h-2 bg-gray-200 accent-orange-600 rounded-lg cursor-pointer range-slider"
           />
-          <p className="text-gray-500 text-sm mb-4">{appointments.toLocaleString("fr-FR")} RDV/mois</p>
+          <p className="text-gray-500 text-sm mb-4">{appointments.toLocaleString("fr-FR")} rendez-vous</p>
 
           {/* Taux de conversion après RDV */}
           <label className="block text-sm font-normal text-gray-700">Taux de conversion (%)</label>
@@ -97,17 +97,17 @@ export default function Home() {
         <div className="flex flex-col">
           <div className="border-b pb-8">
             <h3 className="text-sm font-normal text-gray-700">Vos ventes annuelles</h3>
-            <p className="text-2xl font-bold text-black">{salesPerYear.toLocaleString("fr-FR")} €</p>
+            <p className="text-4xl font-bold text-black">{salesPerYear.toLocaleString("fr-FR")} €</p>
           </div>
 
           <div className="border-b pb-8 pt-8">
             <h3 className="text-sm font-normal text-gray-700">Votre investissement annuel</h3>
-            <p className="text-2xl font-bold text-black">{investment.toLocaleString("fr-FR")} €</p>
+            <p className="text-4xl font-bold text-black">{investment.toLocaleString("fr-FR")} €</p>
           </div>
 
           <div className=" pb-8 pt-8">
             <h3 className="text-sm font-normal text-gray-700">Retour sur investissement</h3>
-            <p className="text-4xl font-bold text-[#ff5e00]">{roi.toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%</p>
+            <p className="text-5xl font-bold text-[#ff5e00]">{roi.toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%</p>
           </div>
         </div>
       </div>
