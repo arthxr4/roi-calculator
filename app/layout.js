@@ -23,8 +23,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Avelius - Calculateur de ROI",
-  description: "Estimé votre ROI généré en externalisant votre prospection",
+  title: "Calculateur de ROI | Avelius",
+  description: "Estimé votre ROI en externalisant votre prospection avec Avelius",
 };
 
 export default function RootLayout({ children }) {
