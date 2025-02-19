@@ -31,7 +31,9 @@ export default function Home() {
   const roi = ((salesPerYear - investment) / investment) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#F4F4F4] p-6">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#F4F4F4] p-6">
+       
+      
       <h1 className="text-5xl font-extrabold mb-6 text-center text-gray-800">
         Calculateur de <span className="text-[#ff5e00]">ROI</span>
       </h1>
@@ -130,10 +132,10 @@ export default function Home() {
             <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
           </span>
         </TooltipTrigger>
-        <TooltipContent className=" text-sm p-3 rounded-md shadow-md max-w-[220px] text-left">
-          À noté : Dépends de l’abonnement choisi
+        <TooltipContent className=" text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
+          Dépends de l’abonnement choisi
           au tarif public. Les prix peuvent varier en fonction d'offres spécifiques 
-          ou de conditions particulières.
+          ou de conditions particulières au secteur.
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
