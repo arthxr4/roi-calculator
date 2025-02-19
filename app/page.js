@@ -27,33 +27,33 @@ export default function Home() {
           Quel revenu et quel retour sur investissement pouvez-vous obtenir avec Avelius ? Utilisez notre calculateur pour voir les résultats réels que nous pouvons obtenir pour votre entreprise 👇
           </h2>
 
-      <div className="bg-white p-8 rounded-lg shadow-sm w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="bg-white p-0 rounded-lg shadow-sm w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-0">
         {/* Partie Gauche - Formulaire */}
-        <div>
-          <h2 className="text-sm font-normal text-gray-700 mb-2">
+        <div className="bg-[#FBFBFB] p-8 rounded-l-lg">
+          <h2 className="text-sm font-normal text-gray-500 mb-2">
             Choisissez votre abonnement
           </h2>
           
 
 
           {/* Sélecteur d'abonnement sous forme de boutons */}
-          <div className="flex gap-4 mb-6">
+          <div className="flex gap-4 mb-6 bg-white rounded-lg p-2">
             <button
               onClick={() => handleSubscriptionChange(2500)}
-              className={`w-1/2 py-3 rounded-lg text-sm font-semibold border  focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
+              className={`w-1/2 py-3 rounded-lg text-sm font-semibold  focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
                 subscription === 2500
                   ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
-                  : "border-gray-300"
+                  : "border-gray-300 bg-white"
               }`}
             >
               Growth
             </button>
             <button
               onClick={() => handleSubscriptionChange(4000)}
-              className={`w-1/2 py-3 rounded-lg text-sm font-semibold  border focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
+              className={`w-1/2 py-3 rounded-lg text-sm font-semibold focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
                 subscription === 4000
                   ? " bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
-                  : "border-gray-300"
+                  : "border-gray-300 bg-white"
               }`}
             >
               Growth Plus
@@ -61,7 +61,7 @@ export default function Home() {
           </div>
 
           {/* Nombre moyen de RDV par mois */}
-          <label className="block text-sm font-normal text-gray-700">Nombre moyen de rdv par mois</label>
+          <label className="block text-sm font-normal text-gray-500">Nombre moyen de rdv par mois</label>
           <input
             type="range"
             min="1"
@@ -73,7 +73,7 @@ export default function Home() {
           <p className="text-gray-500 text-sm mb-4">{appointments.toLocaleString("fr-FR")} rendez-vous</p>
 
           {/* Taux de conversion après RDV */}
-          <label className="block text-sm font-normal text-gray-700">Taux de conversion (%)</label>
+          <label className="block text-sm font-normal text-gray-500">Taux de conversion (%)</label>
           <input
             type="range"
             min="1"
@@ -85,7 +85,7 @@ export default function Home() {
           <p className="text-gray-500 text-sm mb-4">{closeRate.toLocaleString("fr-FR")}%</p>
 
           {/* Valeur annuelle du contrat */}
-          <label className="block text-sm font-normal text-gray-700">Valeur annuelle du contrat (€)</label>
+          <label className="block text-sm font-normal text-gray-500">Valeur annuelle du contrat (€)</label>
           <input
             type="range"
             min="1000"
@@ -99,19 +99,19 @@ export default function Home() {
         </div>
 
         {/* Partie Droite - Résultats avec alignement à gauche et dividers */}
-        <div className="flex flex-col">
+        <div className="flex flex-col p-8 rounded-l-lg">
           <div className="border-b pb-8">
-            <h3 className="text-sm font-normal text-gray-700">Vos ventes annuelles</h3>
+            <h3 className="text-sm font-normal text-gray-800">Vos ventes annuelles</h3>
             <p className="text-4xl font-bold text-black">{salesPerYear.toLocaleString("fr-FR")} €</p>
           </div>
 
           <div className="border-b pb-8 pt-8">
-            <h3 className="text-sm font-normal text-gray-700">Votre investissement annuel</h3>
+            <h3 className="text-sm font-normal text-gray-800">Votre investissement annuel</h3>
             <p className="text-4xl font-bold text-black">{investment.toLocaleString("fr-FR")} €</p>
           </div>
 
           <div className=" pb-8 pt-8">
-            <h3 className="text-sm font-normal text-gray-700">Retour sur investissement</h3>
+            <h3 className="text-sm font-normal text-gray-800">Retour sur investissement</h3>
             <p className="text-5xl font-bold text-[#ff5e00]">{roi.toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%</p>
           </div>
         </div>
