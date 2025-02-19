@@ -19,11 +19,11 @@ export default function Home() {
   const roi = ((salesPerYear - investment) / investment) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold mb-3 text-center text-gray-800">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#F2F2F2] p-6">
+      <h1 className="text-6xl font-bold mb-6 text-center text-gray-800">
         Calculateur de ROI
       </h1>
-      <h2 className="text-sm text-center font-normal text-gray-700 mb-6 max-w-2xl">
+      <h2 className="text-lg text-center font-normal text-gray-700 mb-12 max-w-3xl">
           Quel revenu et quel retour sur investissement pouvez-vous obtenir avec Avelius ? Utilisez notre calculateur pour voir les résultats réels que nous pouvons obtenir pour votre entreprise 👇
           </h2>
 
