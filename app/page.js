@@ -20,10 +20,10 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#F2F2F2] p-6">
-      <h1 className="text-6xl font-bold mb-6 text-center text-gray-800">
+      <h1 className="text-5xl font-bold mb-6 text-center text-gray-800">
         Calculateur de <span className="text-[#ff5e00]">ROI</span>
       </h1>
-      <h2 className="text-lg text-center font-normal text-gray-700 mb-12 max-w-3xl">
+      <h2 className="text-md text-center font-normal text-gray-700 mb-12 max-w-3xl">
           Quel revenu et quel retour sur investissement pouvez-vous obtenir avec Avelius ? Utilisez notre calculateur pour voir les résultats réels que nous pouvons obtenir pour votre entreprise 👇
           </h2>
 
