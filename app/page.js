@@ -19,7 +19,7 @@ export default function Home() {
   const roi = ((salesPerYear - investment) / investment) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#F2F2F2] p-6">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#F4F4F4] p-6">
       <h1 className="text-5xl font-bold mb-6 text-center text-gray-800">
         Calculateur de <span className="text-[#ff5e00]">ROI</span>
       </h1>
@@ -27,7 +27,7 @@ export default function Home() {
           Quel revenu et quel retour sur investissement pouvez-vous obtenir avec Avelius ? Utilisez notre calculateur pour voir les résultats réels que nous pouvons obtenir pour votre entreprise 👇
           </h2>
 
-      <div className="bg-white p-0 rounded-lg shadow-sm w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-0">
+      <div className="bg-white p-0 rounded-lg shadow-sm w-full max-w-4xl grid grid-cols-[55%_45%] gap-0">
         {/* Partie Gauche - Formulaire */}
         <div className="bg-[#FBFBFB] p-8 rounded-l-lg">
           <h2 className="text-sm font-normal text-gray-500 mb-2">
@@ -70,6 +70,10 @@ export default function Home() {
             onChange={(e) => setAppointments(Number(e.target.value))}
             className="w-full h-1 bg-gray-200 accent-orange-600 appearance-none rounded-lg cursor-pointer"
           />
+          
+          
+        
+          
           <p className="text-gray-500 text-sm mb-4">{appointments.toLocaleString("fr-FR")} rendez-vous</p>
 
           {/* Taux de conversion après RDV */}
@@ -101,17 +105,17 @@ export default function Home() {
         {/* Partie Droite - Résultats avec alignement à gauche et dividers */}
         <div className="flex flex-col p-8 rounded-l-lg">
           <div className="border-b pb-8">
-            <h3 className="text-sm font-normal text-gray-800">Vos ventes annuelles</h3>
+            <h3 className="text-sm font-normal text-gray-800 mb-1">Vos ventes annuelles</h3>
             <p className="text-4xl font-bold text-black">{salesPerYear.toLocaleString("fr-FR")} €</p>
           </div>
 
           <div className="border-b pb-8 pt-8">
-            <h3 className="text-sm font-normal text-gray-800">Votre investissement annuel</h3>
+            <h3 className="text-sm font-normal text-gray-800 mb-1">Votre investissement annuel</h3>
             <p className="text-4xl font-bold text-black">{investment.toLocaleString("fr-FR")} €</p>
           </div>
 
           <div className=" pb-8 pt-8">
-            <h3 className="text-sm font-normal text-gray-800">Retour sur investissement</h3>
+            <h3 className="text-sm font-normal text-gray-800 mb-1">Retour sur investissement</h3>
             <p className="text-5xl font-bold text-[#ff5e00]">{roi.toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%</p>
           </div>
         </div>
