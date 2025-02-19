@@ -27,7 +27,7 @@ export default function Home() {
       <div className="bg-white p-8 rounded-lg shadow-sm w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Partie Gauche - Formulaire */}
         <div>
-          <h2 className="text-sm font-normal text-gray-700 mb-4">
+          <h2 className="text-sm font-normal text-gray-700 mb-2">
             Choisissez votre abonnement
           </h2>
 
@@ -35,23 +35,23 @@ export default function Home() {
           <div className="flex gap-4 mb-6">
             <button
               onClick={() => handleSubscriptionChange(2500)}
-              className={`w-1/2 py-3 rounded-lg text-sm font-normal bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
+              className={`w-1/2 py-3 rounded-lg text-sm font-semibold border  focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
                 subscription === 2500
-                  ? "bg-[#FFF1EB] text-[#ff5e00]"
-                  : ""
+                  ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
+                  : "border-gray-300"
               }`}
             >
-              2 500€ / mois
+              Growth
             </button>
             <button
               onClick={() => handleSubscriptionChange(4000)}
-              className={`w-1/2 py-3 rounded-lg text-sm font-normal bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
+              className={`w-1/2 py-3 rounded-lg text-sm font-semibold  border focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
                 subscription === 4000
-                  ? " bg-[#FFF1EB] text-[#ff5e00]"
-                  : " bg-white text-gray-700 border-gray"
+                  ? " bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
+                  : "border-gray-300"
               }`}
             >
-              4 000€ / mois
+              Growth Plus
             </button>
           </div>
 
@@ -95,17 +95,17 @@ export default function Home() {
 
         {/* Partie Droite - Résultats avec alignement à gauche et dividers */}
         <div className="flex flex-col">
-          <div className="border-b pb-4">
+          <div className="border-b pb-8">
             <h3 className="text-sm font-normal text-gray-700">Vos ventes annuelles</h3>
             <p className="text-2xl font-bold text-black">{salesPerYear.toLocaleString("fr-FR")} €</p>
           </div>
 
-          <div className="border-b pb-4 pt-4">
+          <div className="border-b pb-8 pt-8">
             <h3 className="text-sm font-normal text-gray-700">Votre investissement annuel</h3>
             <p className="text-2xl font-bold text-black">{investment.toLocaleString("fr-FR")} €</p>
           </div>
 
-          <div className="border-b pb-4 pt-4">
+          <div className=" pb-8 pt-8">
             <h3 className="text-sm font-normal text-gray-700">Retour sur investissement</h3>
             <p className="text-4xl font-bold text-[#ff5e00]">{roi.toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%</p>
           </div>
