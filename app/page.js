@@ -68,7 +68,7 @@ export default function Home() {
             max="50"
             value={appointments}
             onChange={(e) => setAppointments(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 accent-orange-600 rounded-lg cursor-pointer range-slider"
+            className="w-full h-1 bg-gray-200 accent-orange-600 appearance-none rounded-lg cursor-pointer"
           />
           <p className="text-gray-500 text-sm mb-4">{appointments.toLocaleString("fr-FR")} rendez-vous</p>
 
@@ -80,7 +80,7 @@ export default function Home() {
             max="100"
             value={closeRate}
             onChange={(e) => setCloseRate(Number(e.target.value))}
-            className="w-full h-2 bg-gray-500 accent-orange-600 rounded-lg cursor-pointer range-slider"
+            className="w-full h-1 bg-gray-200 accent-orange-600 appearance-none rounded-lg cursor-pointer"
           />
           <p className="text-gray-500 text-sm mb-4">{closeRate.toLocaleString("fr-FR")}%</p>
 
@@ -93,7 +93,7 @@ export default function Home() {
             step="1000"
             value={contractValue}
             onChange={(e) => setContractValue(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 accent-orange-600 rounded-lg cursor-pointer range-slider"
+            className="w-full h-1 bg-gray-200 accent-orange-600 appearance-none rounded-lg cursor-pointer"
           />
           <p className="text-gray-500 text-sm mb-4">{contractValue.toLocaleString("fr-FR")} €</p>
         </div>
