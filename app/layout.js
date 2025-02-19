@@ -33,6 +33,7 @@ export default function RootLayout({ children }) {
        <head>
         
         <link rel="icon" href="/favicondots.png" type="image/x-icon" /> {/* 🔥 Ajout du favicon */}
+        <link rel="apple-touch-icon" href="/favicondots.png" />
       </head>
       
       <body
