@@ -76,11 +76,11 @@ export default function Home() {
           {/* Nombre moyen de RDV par mois */}
           <label className="block text-sm font-normal text-gray-500 mb-2">Nombre moyen de rdv par mois</label>
           <Slider
-  defaultValue={[appointments]}
+  value={[appointments]} // 🔥 Assure la mise à jour visuelle
   min={1}
   max={50}
   step={1}
-  onValueChange={(value) => setAppointments(value[0])}
+  onValueChange={(value) => setAppointments(value[0])} // 🔄 Met à jour l'état
 />
           
         
