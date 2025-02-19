@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#F4F4F4] p-6">
-      <h1 className="text-5xl font-bold mb-6 text-center text-gray-800">
+      <h1 className="text-5xl font-extrabold mb-6 text-center text-gray-800">
         Calculateur de <span className="text-[#ff5e00]">ROI</span>
       </h1>
       <h2 className="text-md text-center font-normal text-gray-700 mb-12 max-w-3xl">
