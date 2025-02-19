@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function Home() {
   const [subscription, setSubscription] = useState(2500);
   const [appointments, setAppointments] = useState(15);
-  const [closeRate, setCloseRate] = useState(30);
+  const [closeRate, setCloseRate] = useState(20);
   const [contractValue, setContractValue] = useState(18000);
   const [investment, setInvestment] = useState(30000);
 
