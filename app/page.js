@@ -250,6 +250,9 @@ export default function Home() {
           </div>
 
      
+          <Button className="bg-[#ff5e00] hover:bg-[#e04b00] font-medium text-white">
+          Discuter du tarif
+</Button>
 
 
           
