@@ -18,10 +18,10 @@ export default function Home() {
   useEffect(() => {
     const sendHeight = () => {
       const height = document.body.scrollHeight;
-      console.log("🔥 Hauteur envoyée :", height); // ✅ Vérification dans la console
+      console.log("🔥 Hauteur envoyée :", height); // ✅ Vérification
 
-      // Envoi de la hauteur à Webflow
-      window.parent?.postMessage({ frameHeight: height }, "https://avelius-client-first.design.webflow.com");
+      // Correction : Utiliser "*" pour autoriser toutes les origines
+      window.parent?.postMessage({ frameHeight: height }, "*");
     };
 
     sendHeight();
