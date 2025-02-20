@@ -33,7 +33,7 @@ export default function Home() {
   const [subscription, setSubscription] = useState(2500);
   const [appointments, setAppointments] = useState(15);
   const [closeRate, setCloseRate] = useState(13);
-  const [contractValue, setContractValue] = useState(18000);
+  const [contractValue, setContractValue] = useState(15000);
   const [investment, setInvestment] = useState(30000);
 
   // Mise à jour de l'investissement et des RDV en fonction de l'abonnement choisi
