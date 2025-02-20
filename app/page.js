@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -15,6 +15,21 @@ import { Info } from "lucide-react"; // Icône d'information
 
 
 export default function Home() {
+  useEffect(() => {
+    const sendHeight = () => {
+      const height = document.body.scrollHeight;
+      console.log("🔥 Hauteur envoyée :", height); // ✅ Vérification dans la console
+
+      // Envoi de la hauteur à Webflow
+      window.parent?.postMessage({ frameHeight: height }, "https://avelius-client-first.design.webflow.com");
+    };
+
+    sendHeight();
+    window.addEventListener("resize", sendHeight);
+    return () => window.removeEventListener("resize", sendHeight);
+  }, []);
+  
+
   const [subscription, setSubscription] = useState(2500);
   const [appointments, setAppointments] = useState(15);
   const [closeRate, setCloseRate] = useState(13);
@@ -27,6 +42,8 @@ export default function Home() {
     setInvestment(value * 12); // 2500€ = 30 000€, 4000€ = 48 000€
     setAppointments(value === 2500 ? 15 : 30); // 15 RDV pour 2500€, 30 RDV pour 4000€
   };
+
+  
 
   const salesPerYear = appointments * (closeRate / 100) * contractValue * 12;
   const roi = ((salesPerYear - investment) / investment) * 100;
