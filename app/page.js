@@ -17,7 +17,7 @@ import { Info } from "lucide-react"; // Icône d'information
 export default function Home() {
   const [subscription, setSubscription] = useState(2500);
   const [appointments, setAppointments] = useState(15);
-  const [closeRate, setCloseRate] = useState(20);
+  const [closeRate, setCloseRate] = useState(13);
   const [contractValue, setContractValue] = useState(18000);
   const [investment, setInvestment] = useState(30000);
 
@@ -114,11 +114,27 @@ export default function Home() {
         
           
        
-         {/* Taux de conversion (%) */}
+{/* Taux de conversion (%) */}
 <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
-  <label className="block text-sm font-medium text-gray-500">
+  <label className="block text-sm font-medium text-gray-500 flex items-center">
     Taux de conversion (%)
+
+    {/* Icône + Tooltip avec apparition rapide */}
+    <TooltipProvider delayDuration={100}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span className="ml-2">
+            <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
+          </span>
+        </TooltipTrigger>
+        <TooltipContent className="text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
+          Pour calculer ce pourcentage, divisez le nombre de ventes réalisées  
+          par le nombre de devis envoyés. 
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   </label>
+
   <Input
     type="number"
     value={closeRate}
@@ -130,6 +146,7 @@ export default function Home() {
     }}
     className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
   />
+
   <Slider
     value={[closeRate]} 
     min={1}
@@ -140,11 +157,31 @@ export default function Home() {
     className=""
   />
 </div>
+
+
+
+
 {/* Valeur annuelle du contrat (€) */}
 <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
-  <label className="block text-sm font-medium text-gray-500">
+  <label className="block text-sm font-medium text-gray-500 flex items-center">
     Valeur annuelle du contrat (€)
+
+    {/* Icône + Tooltip */}
+    <TooltipProvider delayDuration={100}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span className="ml-2">
+            <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
+          </span>
+        </TooltipTrigger>
+        <TooltipContent className="text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
+          Chiffre d'affaires annuel moyen généré par  
+          chaque contrat client, hors frais additionnels.
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   </label>
+
   <Input
     type="number"
     value={contractValue}
@@ -156,6 +193,7 @@ export default function Home() {
     }}
     className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
   />
+
   <Slider
     value={[contractValue]} 
     min={1000}
@@ -166,6 +204,7 @@ export default function Home() {
     className=""
   />
 </div>
+
           
           
         </div>
@@ -182,7 +221,7 @@ export default function Home() {
   <h3 className="text-sm font-normal text-gray-800 mb-1 flex items-center">
     Votre investissement annuel
     {/* Icône + Tooltip */}
-    <TooltipProvider>
+    <TooltipProvider delayDuration={100}>
       <Tooltip>
         <TooltipTrigger asChild>
           <span className="ml-2">
