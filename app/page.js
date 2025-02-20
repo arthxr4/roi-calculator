@@ -61,13 +61,16 @@ export default function Home() {
           
       <div className="bg-white p-0 rounded-xl shadow-md w-full max-w-4xl grid grid-cols-1 md:grid-cols-[55%_45%] gap-0">
         {/* Partie Gauche - Formulaire */}
+        
         <div className="bg-[#FBFBFB] p-8 rounded-l-xl">
+       
+
           <h2 className="text-sm font-medium text-gray-500 mb-2">
             Choisissez votre abonnement
           </h2>
 
           
-
+      
 
           {/* Sélecteur d'abonnement sous forme de boutons */}
           <div className="flex gap-4 mb-6 bg-[#FFFFFF] border border-gray-200 rounded-lg p-1">
@@ -241,7 +244,9 @@ export default function Home() {
   />
 </div>
 
-          
+<div className="mt-auto flex justify-center mt-5">
+    <img src="/aveliuslogodots.png" alt="Avelius Logo" className="w-28 opacity-90" />
+  </div>
           
         </div>
 
@@ -249,6 +254,8 @@ export default function Home() {
 
         {/* Partie Droite - Résultats avec alignement à gauche et dividers */}
         <div className="flex flex-col p-8 rounded-l-xl">
+          
+      
           <div className="border-b pb-8">
             <h3 className="text-sm font-normal text-gray-800 mb-1">Vos ventes annuelles</h3>
             <p className="text-4xl font-bold text-black">{salesPerYear.toLocaleString("fr-FR")} €</p>
@@ -293,7 +300,6 @@ export default function Home() {
           <Button className="bg-[#ff5e00] hover:bg-[#e04b00] font-medium text-white">
           Discuter du tarif
 </Button>
-
 
           
         </div>
