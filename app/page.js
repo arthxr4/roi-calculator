@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input"; // ✅ Importer le composant Input de ShadCN
 import {
   Tooltip,
   TooltipContent,
@@ -77,31 +78,70 @@ export default function Home() {
 
           {/* Nombre moyen de RDV par mois */}
           <label className="block text-sm font-normal text-gray-500 mb-2">Nombre moyen de rdv par mois</label>
+          <Input
+  type="number"
+  value={appointments}
+  onChange={(e) => {
+    let value = Number(e.target.value);
+    if (value < 1) value = 1;
+    if (value > 50) value = 50;
+    setAppointments(value);
+  }}
+  className="w-full mb-2 border border-gray-300 p-2 rounded-md"
+/>
           <Slider
   value={[appointments]} // 🔥 Assure la mise à jour visuelle
   min={1}
   max={50}
   step={1}
   onValueChange={(value) => setAppointments(value[0])} // 🔄 Met à jour l'état
+  className="mb-4"
 />
           
         
           
-          <p className="text-gray-500 text-sm mb-4 mt-1">{appointments.toLocaleString("fr-FR")} rendez-vous</p>
-
+       
           {/* Taux de conversion après RDV */}
           <label className="block text-sm font-normal text-gray-500 mb-2">Taux de conversion (%)</label>
+          <Input
+  type="number"
+  value={closeRate}
+  onChange={(e) => {
+    let value = Number(e.target.value);
+    if (value < 1) value = 1;
+    if (value > 100) value = 100;
+    setCloseRate(value);
+  }}
+  className="w-full mb-2 border border-gray-300 p-2 rounded-md"
+/>
+          
           <Slider
   defaultValue={[closeRate]}
   min={1}
   max={100}
   step={1}
   onValueChange={(value) => setCloseRate(value[0])}
+  className="mb-4"
 />
-          <p className="text-gray-500 text-sm mb-4 mt-1">{closeRate.toLocaleString("fr-FR")}%</p>
-
+        
           {/* Valeur annuelle du contrat */}
           <label className="block text-sm font-normal text-gray-500 mb-2">Valeur annuelle du contrat (€)</label>
+          <Input
+  type="text" // ⚠️ Utilisation de type="text" pour formater l'affichage
+  value={contractValue.toLocaleString("fr-FR")} // 🔥 Affiche "40 000"
+  onChange={(e) => {
+    let rawValue = e.target.value.replace(/\s/g, ""); // 🔄 Enlève les espaces pour éviter les bugs
+    let value = Number(rawValue);
+
+    if (isNaN(value)) return; // ❌ Empêche les caractères non numériques
+    if (value < 1000) value = 1000;
+    if (value > 500000) value = 500000;
+    
+    setContractValue(value);
+  }}
+  className="w-full mb-2 border border-gray-300 p-2 rounded-md"
+/>
+          
           <Slider
          
   defaultValue={[contractValue]}
@@ -110,7 +150,7 @@ export default function Home() {
   step={1000}
   onValueChange={(value) => setContractValue(value[0])}
 />
-          <p className="text-gray-500 text-sm mb-4 mt-1">{contractValue.toLocaleString("fr-FR")} €</p>
+          
         </div>
 
         {/* Partie Droite - Résultats avec alignement à gauche et dividers */}
