@@ -53,7 +53,7 @@ export default function Home() {
 
 
           {/* Sélecteur d'abonnement sous forme de boutons */}
-          <div className="flex gap-4 mb-6 bg-[#FFFFFF] rounded-lg p-2">
+          <div className="flex gap-4 mb-6 bg-[#FFFFFF] border border-gray-200 rounded-lg p-2">
             <button
               onClick={() => handleSubscriptionChange(2500)}
               className={`w-1/2 py-2 rounded-lg text-sm font-medium  focus:outline-none hover:bg-gray-100 rounded-lg text-sm  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
@@ -75,7 +75,7 @@ export default function Home() {
               Growth Plus
             </button>
           </div>
-          <div className="border border-gray-300 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
+          <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
   <label className="block text-sm font-medium text-gray-500">
     Nombre moyen de RDV par mois
   </label>
@@ -115,7 +115,7 @@ export default function Home() {
           
        
          {/* Taux de conversion (%) */}
-<div className="border border-gray-300 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
+<div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
   <label className="block text-sm font-medium text-gray-500">
     Taux de conversion (%)
   </label>
@@ -141,7 +141,7 @@ export default function Home() {
   />
 </div>
 {/* Valeur annuelle du contrat (€) */}
-<div className="border border-gray-300 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
+<div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
   <label className="block text-sm font-medium text-gray-500">
     Valeur annuelle du contrat (€)
   </label>
