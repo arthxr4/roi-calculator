@@ -70,12 +70,12 @@ export default function Home() {
 
 
           {/* Sélecteur d'abonnement sous forme de boutons */}
-          <div className="flex gap-4 mb-6 bg-[#FFFFFF] border border-gray-200 rounded-lg shadow shadow-sm p-2">
+          <div className="flex gap-4 mb-6 bg-[#FFFFFF] border border-gray-200 rounded-lg p-1">
             <button
               onClick={() => handleSubscriptionChange(2500)}
-              className={`w-1/2 py-2 rounded-lg text-sm font-medium  focus:outline-none hover:bg-gray-100 rounded-lg text-sm  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
+              className={`w-1/2 py-1 text-sm font-medium  focus:outline-none rounded-sm text-sm  transition ${
                 subscription === 2500
-                  ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
+                  ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00] shadow shadow-xs"
                   : "border-gray-300 text-[#71717a] text-black"
               }`}
             >
@@ -83,9 +83,9 @@ export default function Home() {
             </button>
             <button
               onClick={() => handleSubscriptionChange(4000)}
-              className={`w-1/2 py-2 rounded-lg text-sm font-medium focus:outline-none hover:bg-gray-100 rounded-lg text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
+              className={`w-1/2 py-1 text-sm font-medium focus:outline-none rounded-sm text-sm transition ${
                 subscription === 4000
-                  ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
+                  ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00] shadow shadow-xs"
                   : "border-gray-300 text-[#71717a] text-black"
               }`}
             >
