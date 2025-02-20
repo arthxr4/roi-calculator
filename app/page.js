@@ -128,30 +128,48 @@ export default function Home() {
 
 
          
-        
-          
-       
-{/* Taux de conversion (%) */}
-<div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
-  <label className="block text-sm font-medium text-gray-500 flex items-center">
-    Taux de conversion (%)
+        {/* Taux de conversion (%) */}
+<div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400 relative">
+  {/* Label + Tooltip + Indicateur */}
+  <div className="flex justify-between items-center">
+    <label className="text-sm font-medium text-gray-500 flex items-center">
+      Taux de conversion (%)
+      
+      {/* Icône + Tooltip avec apparition rapide */}
+      <TooltipProvider delayDuration={100}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="ml-2">
+              <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
+            </span>
+          </TooltipTrigger>
+          <TooltipContent className="text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
+            Pour calculer ce pourcentage, divisez le nombre de ventes réalisées  
+            par le nombre de devis envoyés.
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </label>
 
-    {/* Icône + Tooltip avec apparition rapide */}
-    <TooltipProvider delayDuration={100}>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <span className="ml-2">
-            <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
-          </span>
-        </TooltipTrigger>
-        <TooltipContent className="text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
-          Pour calculer ce pourcentage, divisez le nombre de ventes réalisées  
-          par le nombre de devis envoyés. 
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  </label>
+    {/* Indicateur dynamique avec segmentation affinée */}
+    <span
+      className={`text-xs font-medium px-2 py-1 rounded-lg transition
+        ${closeRate < 3 ? "bg-red-100 text-red-600" : 
+          closeRate < 5 ? "bg-orange-100 text-orange-600" : 
+          closeRate < 10 ? "bg-yellow-100 text-yellow-600" : 
+          closeRate < 15 ? "bg-green-200 text-green-700" :
+          "bg-green-100 text-green-600"}
+      `}
+    >
+      {closeRate < 3 ? "Très faible" : 
+       closeRate < 5 ? "Faible" : 
+       closeRate < 10 ? "Moyen" : 
+       closeRate < 15 ? "Bon" : 
+       "Excellent"}
+    </span>
+  </div>
 
+  {/* Input */}
   <Input
     type="number"
     value={closeRate}
@@ -164,6 +182,7 @@ export default function Home() {
     className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
   />
 
+  {/* Slider */}
   <Slider
     value={[closeRate]} 
     min={1}
@@ -175,6 +194,7 @@ export default function Home() {
   />
 </div>
 
+          
 
 
 
