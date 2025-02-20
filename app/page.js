@@ -45,7 +45,7 @@ export default function Home() {
       <div className="bg-white p-0 rounded-lg shadow-sm w-full max-w-4xl grid grid-cols-1 md:grid-cols-[55%_45%] gap-0">
         {/* Partie Gauche - Formulaire */}
         <div className="bg-[#FBFBFB] p-8 rounded-l-lg">
-          <h2 className="text-sm font-normal text-gray-500 mb-2">
+          <h2 className="text-sm font-medium text-gray-500 mb-2">
             Choisissez votre abonnement
           </h2>
 
@@ -59,7 +59,7 @@ export default function Home() {
               className={`w-1/2 py-2 rounded-lg text-sm font-medium  focus:outline-none hover:bg-gray-100 rounded-lg text-sm  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
                 subscription === 2500
                   ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
-                  : "border-gray-300 text-[#71717a]"
+                  : "border-gray-300 text-[#71717a] text-black"
               }`}
             >
               Growth
@@ -69,7 +69,7 @@ export default function Home() {
               className={`w-1/2 py-2 rounded-lg text-sm font-medium focus:outline-none hover:bg-gray-100 rounded-lg text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 transition ${
                 subscription === 4000
                   ? "bg-[#FFF1EB] text-[#ff5e00] border-[#ff5e00]"
-                  : "border-gray-300 text-[#71717a]"
+                  : "border-gray-300 text-[#71717a] text-black"
               }`}
             >
               Growth Plus
