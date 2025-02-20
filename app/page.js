@@ -126,7 +126,6 @@ export default function Home() {
 
 
 
-
          
         {/* Taux de conversion (%) */}
 <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400 relative">
@@ -201,7 +200,7 @@ export default function Home() {
 {/* Valeur annuelle du contrat (€) */}
 <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
   <label className="block text-sm font-medium text-gray-500 flex items-center">
-    Valeur annuelle du contrat (€)
+    Valeur annuelle d'un contrat (€)
 
     {/* Icône + Tooltip */}
     <TooltipProvider delayDuration={100}>
@@ -224,7 +223,7 @@ export default function Home() {
     value={contractValue}
     onChange={(e) => {
       let value = Number(e.target.value);
-      if (value < 1000) value = 1000;
+      if (value < 0) value = 0;
       if (value > 500000) value = 500000;
       setContractValue(value);
     }}
@@ -233,7 +232,7 @@ export default function Home() {
 
   <Slider
     value={[contractValue]} 
-    min={1000}
+    min={2000}
     max={500000}
     step={1000}
     onValueChange={(value) => setContractValue(value[0])}
@@ -246,12 +245,16 @@ export default function Home() {
           
         </div>
 
+        
+
         {/* Partie Droite - Résultats avec alignement à gauche et dividers */}
         <div className="flex flex-col p-8 rounded-l-xl">
           <div className="border-b pb-8">
             <h3 className="text-sm font-normal text-gray-800 mb-1">Vos ventes annuelles</h3>
             <p className="text-4xl font-bold text-black">{salesPerYear.toLocaleString("fr-FR")} €</p>
           </div>
+
+
 
           {/* Bloc "Votre investissement annuel" avec tooltip */}
 <div className="border-b pb-8 pt-8 items-center justify-between">
