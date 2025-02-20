@@ -38,11 +38,11 @@ export default function Home() {
       <h1 className="text-5xl font-extrabold mb-6 text-center text-gray-800">
         Calculateur de <span className="text-[#ff5e00]">ROI</span>
       </h1>
-      <h2 className="text-md text-center font-normal text-gray-700 mb-12 max-w-3xl">
+      <h2 className="text-md text-center font-normal text-gray-700 mb-9 max-w-3xl">
           Quel revenu et quel retour sur investissement pouvez-vous obtenir avec Avelius ? Utilisez notre calculateur pour voir les résultats réels que nous pouvons obtenir pour votre entreprise 👇
           </h2>
           
-      <div className="bg-white p-0 rounded-lg shadow-sm w-full max-w-4xl grid grid-cols-[55%_45%] gap-0">
+      <div className="bg-white p-0 rounded-lg shadow-sm w-full max-w-4xl grid grid-cols-1 md:grid-cols-[55%_45%] gap-0">
         {/* Partie Gauche - Formulaire */}
         <div className="bg-[#FBFBFB] p-8 rounded-l-lg">
           <h2 className="text-sm font-normal text-gray-500 mb-2">
@@ -75,81 +75,98 @@ export default function Home() {
               Growth Plus
             </button>
           </div>
+          <div className="border border-gray-300 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
+  <label className="block text-sm font-medium text-gray-500">
+    Nombre moyen de RDV par mois
+  </label>
 
-          {/* Nombre moyen de RDV par mois */}
-          <label className="block text-sm font-normal text-gray-500 mb-2">Nombre moyen de rdv par mois</label>
-          <Input
-  type="number"
-  value={appointments}
-  onChange={(e) => {
-    let value = Number(e.target.value);
-    if (value < 1) value = 1;
-    if (value > 50) value = 50;
-    setAppointments(value);
-  }}
-  className="w-full mb-2 border border-gray-300 p-2 rounded-md"
-/>
-          <Slider
-  value={[appointments]} // 🔥 Assure la mise à jour visuelle
-  min={1}
-  max={50}
-  step={1}
-  onValueChange={(value) => setAppointments(value[0])} // 🔄 Met à jour l'état
-  className="mb-4"
-/>
-          
+  {/* Input sans bordure mais qui déclenche le focus sur la div */}
+  <Input
+    type="number"
+    value={appointments}
+    onChange={(e) => {
+      let value = Number(e.target.value);
+      if (value < 1) value = 1;
+      if (value > 50) value = 50;
+      setAppointments(value);
+    }}
+    className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
+  />
+
+
+  
+    <Slider
+      value={[appointments]} 
+      min={1}
+      max={50}
+      step={1}
+      onValueChange={(value) => setAppointments(value[0])}
+      onPointerUp={() => document.activeElement.blur()}
+      className=""
+    />
+ 
+</div>
+
+
+
+
+         
         
           
        
-          {/* Taux de conversion après RDV */}
-          <label className="block text-sm font-normal text-gray-500 mb-2">Taux de conversion (%)</label>
-          <Input
-  type="number"
-  value={closeRate}
-  onChange={(e) => {
-    let value = Number(e.target.value);
-    if (value < 1) value = 1;
-    if (value > 100) value = 100;
-    setCloseRate(value);
-  }}
-  className="w-full mb-2 border border-gray-300 p-2 rounded-md"
-/>
+         {/* Taux de conversion (%) */}
+<div className="border border-gray-300 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
+  <label className="block text-sm font-medium text-gray-500">
+    Taux de conversion (%)
+  </label>
+  <Input
+    type="number"
+    value={closeRate}
+    onChange={(e) => {
+      let value = Number(e.target.value);
+      if (value < 1) value = 1;
+      if (value > 100) value = 100;
+      setCloseRate(value);
+    }}
+    className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
+  />
+  <Slider
+    value={[closeRate]} 
+    min={1}
+    max={100}
+    step={1}
+    onValueChange={(value) => setCloseRate(value[0])}
+    onPointerUp={() => document.activeElement.blur()}
+    className=""
+  />
+</div>
+{/* Valeur annuelle du contrat (€) */}
+<div className="border border-gray-300 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
+  <label className="block text-sm font-medium text-gray-500">
+    Valeur annuelle du contrat (€)
+  </label>
+  <Input
+    type="number"
+    value={contractValue}
+    onChange={(e) => {
+      let value = Number(e.target.value);
+      if (value < 1000) value = 1000;
+      if (value > 500000) value = 500000;
+      setContractValue(value);
+    }}
+    className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
+  />
+  <Slider
+    value={[contractValue]} 
+    min={1000}
+    max={500000}
+    step={1000}
+    onValueChange={(value) => setContractValue(value[0])}
+    onPointerUp={() => document.activeElement.blur()}
+    className=""
+  />
+</div>
           
-          <Slider
-  defaultValue={[closeRate]}
-  min={1}
-  max={100}
-  step={1}
-  onValueChange={(value) => setCloseRate(value[0])}
-  className="mb-4"
-/>
-        
-          {/* Valeur annuelle du contrat */}
-          <label className="block text-sm font-normal text-gray-500 mb-2">Valeur annuelle du contrat (€)</label>
-          <Input
-  type="text" // ⚠️ Utilisation de type="text" pour formater l'affichage
-  value={contractValue.toLocaleString("fr-FR")} // 🔥 Affiche "40 000"
-  onChange={(e) => {
-    let rawValue = e.target.value.replace(/\s/g, ""); // 🔄 Enlève les espaces pour éviter les bugs
-    let value = Number(rawValue);
-
-    if (isNaN(value)) return; // ❌ Empêche les caractères non numériques
-    if (value < 1000) value = 1000;
-    if (value > 500000) value = 500000;
-    
-    setContractValue(value);
-  }}
-  className="w-full mb-2 border border-gray-300 p-2 rounded-md"
-/>
-          
-          <Slider
-         
-  defaultValue={[contractValue]}
-  min={1000}
-  max={500000}
-  step={1000}
-  onValueChange={(value) => setContractValue(value[0])}
-/>
           
         </div>
 
