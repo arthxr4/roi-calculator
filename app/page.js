@@ -54,7 +54,7 @@ export default function Home() {
     "Marketing Digital & Publicité": { appointments: 18, closeRate: 12, contractValue: 26000, ranges: [1, 4, 7, 10] }, 
     "Recrutement & Ressources Humaines": { appointments: 15, closeRate: 14, contractValue: 30000, ranges: [3, 6, 10, 14] }, 
     "Immobilier & Services Juridiques": { appointments: 12, closeRate: 18, contractValue: 60000, ranges: [4, 7, 12, 17] },
-    "Industrie & Fabrication": { appointments: 8, closeRate: 18, contractValue: 77500, ranges: [5, 8, 13, 18] },  
+    "Industrie & Fabrication": { appointments: 8, closeRate: 13, contractValue: 50000, ranges: [5, 8, 13, 18] },  
     "Développement Logiciel & IT": { appointments: 12, closeRate: 14, contractValue: 65000, ranges: [3, 6, 11, 16] }, 
     "Transport & Mobilité": { appointments: 10, closeRate: 12, contractValue: 72500, ranges: [3, 6, 11, 16] }, 
     "SEO & Growth Marketing": { appointments: 18, closeRate: 10, contractValue: 20000, ranges: [1, 3, 6, 9] } 
@@ -453,6 +453,7 @@ const updateValues = (sector, subscriptionValue) => {
           <Button className="bg-[#ff5e00] hover:bg-[#e04b00] font-medium text-white py-5">
           Discuter du tarif
 </Button>
+
 
           
         </div>
