@@ -53,7 +53,8 @@ export default function Home() {
     "Médias & Production Audiovisuelle": { appointments: 12, closeRate: 10, contractValue: 40000, ranges: [2, 5, 9, 12] }, 
     "Marketing Digital & Publicité": { appointments: 18, closeRate: 12, contractValue: 26000, ranges: [1, 4, 7, 10] }, 
     "Recrutement & Ressources Humaines": { appointments: 15, closeRate: 14, contractValue: 30000, ranges: [3, 6, 10, 14] }, 
-    "Immobilier & Services Juridiques": { appointments: 12, closeRate: 18, contractValue: 60000, ranges: [4, 7, 12, 17] }, 
+    "Immobilier & Services Juridiques": { appointments: 12, closeRate: 18, contractValue: 60000, ranges: [4, 7, 12, 17] },
+    "Industrie & Fabrication": { appointments: 8, closeRate: 18, contractValue: 77500, ranges: [5, 8, 13, 18] },  
     "Développement Logiciel & IT": { appointments: 12, closeRate: 14, contractValue: 65000, ranges: [3, 6, 11, 16] }, 
     "Transport & Mobilité": { appointments: 10, closeRate: 12, contractValue: 72500, ranges: [3, 6, 11, 16] }, 
     "SEO & Growth Marketing": { appointments: 18, closeRate: 10, contractValue: 20000, ranges: [1, 3, 6, 9] } 
@@ -162,7 +163,7 @@ const updateValues = (sector, subscriptionValue) => {
           Quel revenu et quel retour sur investissement pouvez-vous obtenir avec Avelius ? Utilisez notre calculateur pour voir les résultats réels que nous pouvons obtenir pour votre entreprise 👇
           </h2>
           </div>
-      <div className="bg-white p-0 rounded-xl shadow-md w-full max-w-4xl grid grid-cols-1 md:grid-cols-[55%_45%] gap-0">
+      <div className="bg-white p-0 rounded-xl shadow-md w-full max-w-5xl grid grid-cols-1 md:grid-cols-[65%_35%] gap-0">
         {/* Partie Gauche - Formulaire */}
         
         <div className="bg-[#FBFBFB] p-6 md:p-8 rounded-t-xl md:rounded-none md:rounded-l-xl">
@@ -285,7 +286,7 @@ const updateValues = (sector, subscriptionValue) => {
   {/* Label + Tooltip + Indicateur */}
   <div className="flex justify-between items-center">
     <label className="text-sm font-medium text-gray-500 flex items-center">
-      Taux de conversion (%)
+      Taux de conversion après rendez-vous (%)
       
       {/* Icône + Tooltip avec apparition rapide */}
       <TooltipProvider delayDuration={100}>
