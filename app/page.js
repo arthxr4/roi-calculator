@@ -1,5 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion"; // 🔥 Import Framer Motion
+import { useSpring, useSprings, animated } from "@react-spring/web"; // 🚀 Pour animer les nombres
+
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+
 
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -11,6 +22,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Info } from "lucide-react"; // Icône d'information
+import { ChevronDown } from "lucide-react";
 
 
 
@@ -29,40 +41,131 @@ export default function Home() {
     return () => window.removeEventListener("resize", sendHeight);
   }, []);
   
+  const SECTOR_DATA = { 
+    "Banque & Finance": { appointments: 10, closeRate: 12, contractValue: 55000, ranges: [3, 6, 10, 15] }, 
+    "Conseil en Stratégie & Management": { appointments: 8, closeRate: 18, contractValue: 80000, ranges: [4, 7, 12, 17] }, 
+    "Analyse de Données & Intelligence Artificielle": { appointments: 11, closeRate: 22, contractValue: 100000, ranges: [5, 8, 13, 18] }, 
+    "Formation & E-learning": { appointments: 18, closeRate: 10, contractValue: 22500, ranges: [2, 5, 8, 12] }, 
+    "Énergies & Services Environnementaux": { appointments: 10, closeRate: 14, contractValue: 80000, ranges: [3, 6, 11, 16] }, 
+    "Événementiel & Communication": { appointments: 15, closeRate: 12, contractValue: 27500, ranges: [3, 6, 10, 14] }, 
+    "Fintech & Cryptomonnaies": { appointments: 10, closeRate: 18, contractValue: 120000, ranges: [5, 9, 14, 20] }, 
+    "Logiciels & SaaS": { appointments: 15, closeRate: 16, contractValue: 52500, ranges: [4, 7, 11, 15] }, 
+    "Médias & Production Audiovisuelle": { appointments: 12, closeRate: 10, contractValue: 40000, ranges: [2, 5, 9, 12] }, 
+    "Marketing Digital & Publicité": { appointments: 18, closeRate: 12, contractValue: 26000, ranges: [1, 4, 7, 10] }, 
+    "Recrutement & Ressources Humaines": { appointments: 15, closeRate: 14, contractValue: 30000, ranges: [3, 6, 10, 14] }, 
+    "Immobilier & Services Juridiques": { appointments: 12, closeRate: 18, contractValue: 60000, ranges: [4, 7, 12, 17] }, 
+    "Développement Logiciel & IT": { appointments: 12, closeRate: 14, contractValue: 65000, ranges: [3, 6, 11, 16] }, 
+    "Transport & Mobilité": { appointments: 10, closeRate: 12, contractValue: 72500, ranges: [3, 6, 11, 16] }, 
+    "SEO & Growth Marketing": { appointments: 18, closeRate: 10, contractValue: 20000, ranges: [1, 3, 6, 9] } 
+    };
+  
+  const DEFAULT_SECTOR = "Banque & Finance"; // 🔥 Secteur par défaut
 
-  const [subscription, setSubscription] = useState(2500);
-  const [appointments, setAppointments] = useState(15);
-  const [closeRate, setCloseRate] = useState(13);
-  const [contractValue, setContractValue] = useState(15000);
-  const [investment, setInvestment] = useState(30000);
 
-  // Mise à jour de l'investissement et des RDV en fonction de l'abonnement choisi
-  const handleSubscriptionChange = (value) => {
-    setSubscription(value);
-    setInvestment(value * 12); // 2500€ = 30 000€, 4000€ = 48 000€
-    setAppointments(value === 2500 ? 15 : 30); // 15 RDV pour 2500€, 30 RDV pour 4000€
+  
+  const getCloseRateLabel = (rate, sector) => {
+    if (!sector || !SECTOR_DATA[sector]) return "Inconnu";
+    const [veryLow, low, medium, good] = SECTOR_DATA[sector].ranges;
+  
+    if (rate < veryLow) return "Très faible";
+    if (rate < low) return "Faible";
+    if (rate < medium) return "Moyen";
+    if (rate < good) return "Bon";
+    return "Excellent";
   };
+  
+  const getCloseRateColor = (rate, sector) => {
+    if (!sector || !SECTOR_DATA[sector]) return "bg-gray-200 text-gray-600";
+    const [veryLow, low, medium, good] = SECTOR_DATA[sector].ranges;
+  
+    if (rate < veryLow) return "bg-red-100 text-red-600";
+    if (rate < low) return "bg-orange-100 text-orange-600";
+    if (rate < medium) return "bg-yellow-100 text-yellow-600";
+    if (rate < good) return "bg-green-200 text-green-700";
+    return "bg-green-100 text-green-600";
+  };
+  
+
+  
+  const [selectedSector, setSelectedSector] = useState(DEFAULT_SECTOR);
+const [appointments, setAppointments] = useState(SECTOR_DATA[DEFAULT_SECTOR].appointments);
+const [closeRate, setCloseRate] = useState(SECTOR_DATA[DEFAULT_SECTOR].closeRate);
+const [contractValue, setContractValue] = useState(SECTOR_DATA[DEFAULT_SECTOR].contractValue);
+
+  const [isFocused, setIsFocused] = useState(false);
+  const [subscription, setSubscription] = useState(2500);
+ 
+  const [investment, setInvestment] = useState(30000);
+  const [isAnimating, setIsAnimating] = useState(false); // Pour détecter un changement et lancer l'animation
+
+
+  useEffect(() => {
+    if (selectedSector) {
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 600); // Reset après animation
+    }
+  }, [appointments, closeRate, contractValue]);
+
+  // Fonction pour gérer le changement de secteur
+const handleSectorChange = (sector) => {
+  setSelectedSector(sector);
+  updateValues(sector, subscription);
+};
+
+// Fonction pour gérer le changement d'abonnement
+const handleSubscriptionChange = (value) => {
+  setSubscription(value);
+  setInvestment(value * 12); // ✅ Corrige l'investissement annuel
+  
+  if (selectedSector) {
+    updateValues(selectedSector, value);
+  }
+};
+
+
+
+const updateValues = (sector, subscriptionValue) => {
+  if (SECTOR_DATA[sector]) {
+    const multiplier = subscriptionValue === 4000 ? 2 : 1; // Growth Plus = X2
+    setAppointments(SECTOR_DATA[sector].appointments * multiplier);
+    setCloseRate(SECTOR_DATA[sector].closeRate); // Le taux de closing reste le même
+    setContractValue(SECTOR_DATA[sector].contractValue);
+  }
+};
 
   
 
   const salesPerYear = appointments * (closeRate / 100) * contractValue * 12;
   const roi = ((salesPerYear - investment) / investment) * 100;
 
+  const [springs, api] = useSprings(3, (index) => ({
+    from: { number: 0 },
+    number: [salesPerYear, investment, roi][index], // Animation de sales, investment et ROI
+    config: { tension: 200, friction: 14 },
+  }));
+
+  // Mettre à jour les valeurs animées
+  useEffect(() => {
+    api.start((index) => ({
+      number: [salesPerYear, investment, roi][index],
+    }));
+  }, [salesPerYear, investment, roi, api]);
+
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#F4F4F4] p-6">
-       
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#F4F4F4] p-2">
+       <div className="p-4">
       
-      <h1 className="text-5xl font-extrabold mb-6 text-center text-gray-800">
+      <h1 className="text-5xl font-bold mb-6 text-center text-gray-800">
         Calculateur de <span className="text-[#ff5e00]">ROI</span>
       </h1>
       <h2 className="text-md text-center font-normal text-gray-700 mb-9 max-w-3xl">
           Quel revenu et quel retour sur investissement pouvez-vous obtenir avec Avelius ? Utilisez notre calculateur pour voir les résultats réels que nous pouvons obtenir pour votre entreprise 👇
           </h2>
-          
+          </div>
       <div className="bg-white p-0 rounded-xl shadow-md w-full max-w-4xl grid grid-cols-1 md:grid-cols-[55%_45%] gap-0">
         {/* Partie Gauche - Formulaire */}
         
-        <div className="bg-[#FBFBFB] p-8 rounded-l-xl">
+        <div className="bg-[#FBFBFB] p-6 md:p-8 rounded-t-xl md:rounded-none md:rounded-l-xl">
        
 
           <h2 className="text-sm font-medium text-gray-500 mb-2">
@@ -95,12 +198,61 @@ export default function Home() {
               Growth Plus
             </button>
           </div>
-          <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400">
-  <label className="block text-sm font-medium text-gray-500">
-    Nombre moyen de RDV par mois
-  </label>
 
-  {/* Input sans bordure mais qui déclenche le focus sur la div */}
+          <div
+      onClick={() => document.getElementById("sector-select")?.click()} // Rend toute la div cliquable
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      className={`border bg-white rounded-lg px-4 py-3 mb-4 w-full transition 
+        ${isFocused ? "border-gray-400" : "border-gray-200"}
+        focus-within:border-gray-400 cursor-pointer`}
+    >
+      <label className="block text-sm mb-2 font-medium text-gray-500">
+        Sélectionner votre secteur
+      </label>
+
+      <Select onValueChange={handleSectorChange} value={selectedSector}>
+  <SelectTrigger
+    id="sector-select"
+    className="w-full border-none pl-0 bg-white shadow-none rounded-md focus:ring-0 focus:border-none"
+  >
+    <SelectValue placeholder="Sélectionnez un secteur" />
+  </SelectTrigger>
+
+  <SelectContent className="w-full">
+    {Object.keys(SECTOR_DATA).map((sector) => (
+      <SelectItem key={sector} value={sector} className="hover:bg-gray-100 w-full py-3">
+        {sector}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
+    </div>
+
+
+        
+
+<div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400 relative">
+  <div className="flex justify-between items-center">
+    <label className="block text-sm font-medium text-gray-500 flex items-center">
+      Nombre moyen de RDV par mois
+      {/* Tooltip pour expliquer l'estimation */}
+      <TooltipProvider delayDuration={100}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="ml-2">
+              <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
+            </span>
+          </TooltipTrigger>
+          <TooltipContent className="text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
+            Estimation basée sur notre expérience dans ce secteur. Les résultats peuvent varier selon votre activité et marché cible.
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </label>
+  </div>
+
+  {/* Input */}
   <Input
     type="number"
     value={appointments}
@@ -113,18 +265,16 @@ export default function Home() {
     className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
   />
 
-
-  
-    <Slider
-      value={[appointments]} 
-      min={1}
-      max={50}
-      step={1}
-      onValueChange={(value) => setAppointments(value[0])}
-      onPointerUp={() => document.activeElement.blur()}
-      className=""
-    />
- 
+  {/* Slider */}
+  <Slider
+    value={[appointments]} 
+    min={1}
+    max={50}
+    step={1}
+    onValueChange={(value) => setAppointments(value[0])}
+    onPointerUp={() => document.activeElement.blur()}
+    className=""
+  />
 </div>
 
 
@@ -146,7 +296,7 @@ export default function Home() {
             </span>
           </TooltipTrigger>
           <TooltipContent className="text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
-            Pour calculer ce pourcentage, divisez le nombre de ventes réalisées  
+            Très dépendant de votre secteur d'activité. Pour calculer ce pourcentage, divisez le nombre de ventes réalisées  
             par le nombre de devis envoyés.
           </TooltipContent>
         </Tooltip>
@@ -155,20 +305,11 @@ export default function Home() {
 
     {/* Indicateur dynamique avec segmentation affinée */}
     <span
-      className={`text-xs font-medium px-2 py-1 rounded-lg transition
-        ${closeRate < 3 ? "bg-red-100 text-red-600" : 
-          closeRate < 5 ? "bg-orange-100 text-orange-600" : 
-          closeRate < 10 ? "bg-yellow-100 text-yellow-600" : 
-          closeRate < 15 ? "bg-green-200 text-green-700" :
-          "bg-green-100 text-green-600"}
-      `}
-    >
-      {closeRate < 3 ? "Très faible" : 
-       closeRate < 5 ? "Faible" : 
-       closeRate < 10 ? "Moyen" : 
-       closeRate < 15 ? "Bon" : 
-       "Excellent"}
-    </span>
+  className={`text-xs font-medium px-2 py-1 rounded-lg transition ${getCloseRateColor(closeRate, selectedSector)}`}
+>
+  {getCloseRateLabel(closeRate, selectedSector)}
+</span>
+
   </div>
 
   {/* Input */}
@@ -256,16 +397,21 @@ export default function Home() {
         <div className="flex flex-col p-8 rounded-l-xl">
           
       
-          <div className="border-b pb-8">
-            <h3 className="text-sm font-normal text-gray-800 mb-1">Vos ventes annuelles</h3>
-            <p className="text-4xl font-bold text-black">{salesPerYear.toLocaleString("fr-FR")} €</p>
+          <div className="border-b pb-9">
+            <h3 className="text-sm font-normal text-gray-800 mb-2">Vos ventes annuelles</h3>
+            <p className="text-3xl font-bold text-black md:text-4xl">
+    <animated.span>
+      {springs[0].number.to((n) => Math.round(n).toLocaleString("fr-FR"))}
+    </animated.span> €
+  </p>
+
           </div>
 
 
 
           {/* Bloc "Votre investissement annuel" avec tooltip */}
-<div className="border-b pb-8 pt-8 items-center justify-between">
-  <h3 className="text-sm font-normal text-gray-800 mb-1 flex items-center">
+<div className="border-b pb-9 pt-9 items-center justify-between">
+  <h3 className="text-sm font-normal text-gray-800 mb-2 flex items-center">
     Votre investissement annuel
     {/* Icône + Tooltip */}
     <TooltipProvider delayDuration={100}>
@@ -285,19 +431,25 @@ export default function Home() {
   </h3>
 
   {/* Affichage du montant formaté */}
-  <p className="text-4xl font-bold text-black">
-    {investment.toLocaleString("fr-FR")} €
+  <p className="text-3xl font-bold text-black md:text-4xl">
+    <animated.span>
+      {springs[1].number.to((n) => Math.round(n).toLocaleString("fr-FR"))}
+    </animated.span> €
   </p>
 </div>
 
 
-          <div className=" pb-8 pt-8">
-            <h3 className="text-sm font-normal text-gray-800 mb-1">Retour sur investissement</h3>
-            <p className="text-5xl font-bold text-[#ff5e00]">{roi.toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%</p>
+          <div className=" pb-9 pt-9">
+            <h3 className="text-sm font-normal text-gray-800 mb-2">Retour sur investissement</h3>
+           <p className="text-4xl font-bold text-[#ff5e00] md:text-5xl">
+    <animated.span>
+      {springs[2].number.to((n) => Math.round(n).toLocaleString("fr-FR"))}
+    </animated.span> %
+  </p>
           </div>
 
      
-          <Button className="bg-[#ff5e00] hover:bg-[#e04b00] font-medium text-white">
+          <Button className="bg-[#ff5e00] hover:bg-[#e04b00] font-medium text-white py-5">
           Discuter du tarif
 </Button>
 
