@@ -42,23 +42,23 @@ export default function Home() {
   }, []);
   
   const SECTOR_DATA = { 
-    "Banque & Finance": { appointments: 10, closeRate: 12, contractValue: 55000, ranges: [3, 6, 10, 15] }, 
-    "Conseil en Stratégie & Management": { appointments: 8, closeRate: 18, contractValue: 80000, ranges: [4, 7, 12, 17] }, 
-    "Analyse de Données & Intelligence Artificielle": { appointments: 11, closeRate: 22, contractValue: 100000, ranges: [5, 8, 13, 18] }, 
-    "Formation & E-learning": { appointments: 18, closeRate: 10, contractValue: 22500, ranges: [2, 5, 8, 12] }, 
-    "Énergies & Services Environnementaux": { appointments: 10, closeRate: 14, contractValue: 80000, ranges: [3, 6, 11, 16] }, 
-    "Événementiel & Communication": { appointments: 15, closeRate: 12, contractValue: 27500, ranges: [3, 6, 10, 14] }, 
-    "Fintech & Cryptomonnaies": { appointments: 10, closeRate: 18, contractValue: 120000, ranges: [5, 9, 14, 20] }, 
-    "Logiciels & SaaS": { appointments: 15, closeRate: 16, contractValue: 52500, ranges: [4, 7, 11, 15] }, 
-    "Médias & Production Audiovisuelle": { appointments: 12, closeRate: 10, contractValue: 40000, ranges: [2, 5, 9, 12] }, 
-    "Marketing Digital & Publicité": { appointments: 18, closeRate: 12, contractValue: 26000, ranges: [1, 4, 7, 10] }, 
-    "Recrutement & Ressources Humaines": { appointments: 15, closeRate: 14, contractValue: 30000, ranges: [3, 6, 10, 14] }, 
-    "Immobilier & Services Juridiques": { appointments: 12, closeRate: 18, contractValue: 60000, ranges: [4, 7, 12, 17] },
-    "Industrie & Fabrication": { appointments: 8, closeRate: 13, contractValue: 50000, ranges: [5, 8, 13, 18] },  
-    "Développement Logiciel & IT": { appointments: 12, closeRate: 14, contractValue: 65000, ranges: [3, 6, 11, 16] }, 
-    "Transport & Mobilité": { appointments: 10, closeRate: 12, contractValue: 72500, ranges: [3, 6, 11, 16] }, 
-    "SEO & Growth Marketing": { appointments: 18, closeRate: 10, contractValue: 20000, ranges: [1, 3, 6, 9] } 
-    };
+    "Banque & Finance": { appointments: 10, closeRate: 12, contractValue: 55000, salesCycle: 6, ranges: [3, 6, 10, 15] }, 
+    "Conseil en Stratégie & Management": { appointments: 8, closeRate: 18, contractValue: 80000, salesCycle: 2, ranges: [4, 7, 12, 17] }, 
+    "Analyse de Données & Intelligence Artificielle": { appointments: 11, closeRate: 22, contractValue: 100000, salesCycle: 3, ranges: [5, 8, 13, 18] }, 
+    "Formation & E-learning": { appointments: 18, closeRate: 10, contractValue: 22500, salesCycle: 2, ranges: [2, 5, 8, 12] }, 
+    "Énergies & Services Environnementaux": { appointments: 10, closeRate: 14, contractValue: 80000, salesCycle: 9, ranges: [3, 6, 11, 16] }, 
+    "Événementiel & Communication": { appointments: 15, closeRate: 12, contractValue: 27500, salesCycle: 2, ranges: [3, 6, 10, 14] }, 
+    "Fintech & Cryptomonnaies": { appointments: 10, closeRate: 18, contractValue: 120000, salesCycle: 3, ranges: [5, 9, 14, 20] }, 
+    "Logiciels & SaaS": { appointments: 15, closeRate: 16, contractValue: 52500, salesCycle: 2, ranges: [4, 7, 11, 15] }, 
+    "Médias & Production Audiovisuelle": { appointments: 12, closeRate: 10, contractValue: 40000, salesCycle: 2, ranges: [2, 5, 9, 12] }, 
+    "Marketing Digital & Publicité": { appointments: 18, closeRate: 12, contractValue: 26000, salesCycle: 2, ranges: [1, 4, 7, 10] }, 
+    "Recrutement & Ressources Humaines": { appointments: 15, closeRate: 14, contractValue: 30000, salesCycle: 2, ranges: [3, 6, 10, 14] }, 
+    "Immobilier & Services Juridiques": { appointments: 12, closeRate: 18, contractValue: 60000, salesCycle: 5, ranges: [4, 7, 12, 17] },
+    "Industrie & Fabrication": { appointments: 10, closeRate: 13, contractValue: 50000, salesCycle: 6, ranges: [5, 8, 13, 18] },  
+    "Développement Logiciel & IT": { appointments: 12, closeRate: 14, contractValue: 65000, salesCycle: 3, ranges: [3, 6, 11, 16] }, 
+    "Transport & Mobilité": { appointments: 10, closeRate: 12, contractValue: 72500, salesCycle: 5, ranges: [3, 6, 11, 16] }, 
+    "SEO & Growth Marketing": { appointments: 18, closeRate: 10, contractValue: 20000, salesCycle: 2, ranges: [1, 3, 6, 9] } 
+};
   
   const DEFAULT_SECTOR = "Banque & Finance"; // 🔥 Secteur par défaut
 
@@ -88,16 +88,17 @@ export default function Home() {
   
 
   
-  const [selectedSector, setSelectedSector] = useState(DEFAULT_SECTOR);
+const [selectedSector, setSelectedSector] = useState(DEFAULT_SECTOR);
 const [appointments, setAppointments] = useState(SECTOR_DATA[DEFAULT_SECTOR].appointments);
 const [closeRate, setCloseRate] = useState(SECTOR_DATA[DEFAULT_SECTOR].closeRate);
 const [contractValue, setContractValue] = useState(SECTOR_DATA[DEFAULT_SECTOR].contractValue);
+const [salesCycle, setSalesCycle] = useState(6); // 6 mois par défaut
 
-  const [isFocused, setIsFocused] = useState(false);
-  const [subscription, setSubscription] = useState(2500);
+const [isFocused, setIsFocused] = useState(false);
+const [subscription, setSubscription] = useState(2500);
  
-  const [investment, setInvestment] = useState(30000);
-  const [isAnimating, setIsAnimating] = useState(false); // Pour détecter un changement et lancer l'animation
+const [investment, setInvestment] = useState(30000);
+const [isAnimating, setIsAnimating] = useState(false); // Pour détecter un changement et lancer l'animation
 
 
   useEffect(() => {
@@ -127,22 +128,25 @@ const handleSubscriptionChange = (value) => {
 
 const updateValues = (sector, subscriptionValue) => {
   if (SECTOR_DATA[sector]) {
-    const multiplier = subscriptionValue === 4000 ? 2 : 1; // Growth Plus = X2
+    const multiplier = subscriptionValue === 4000 ? 2 : 1;
     setAppointments(SECTOR_DATA[sector].appointments * multiplier);
-    setCloseRate(SECTOR_DATA[sector].closeRate); // Le taux de closing reste le même
+    setCloseRate(SECTOR_DATA[sector].closeRate);
     setContractValue(SECTOR_DATA[sector].contractValue);
+    setSalesCycle(SECTOR_DATA[sector].salesCycle); // 🔥 Mettre à jour le cycle de vente
   }
 };
 
   
 
-  const salesPerYear = appointments * (closeRate / 100) * contractValue * 12;
+
+  const salesPerYear = (appointments * (closeRate / 100) * contractValue * (12 / salesCycle));
+
   const roi = ((salesPerYear - investment) / investment) * 100;
 
   const [springs, api] = useSprings(3, (index) => ({
     from: { number: 0 },
     number: [salesPerYear, investment, roi][index], // Animation de sales, investment et ROI
-    config: { tension: 200, friction: 14 },
+    config: { tension: 5, friction: 1 },
   }));
 
   // Mettre à jour les valeurs animées
@@ -260,7 +264,7 @@ const updateValues = (sector, subscriptionValue) => {
     onChange={(e) => {
       let value = Number(e.target.value);
       if (value < 1) value = 1;
-      if (value > 50) value = 50;
+      if (value > 40) value = 40;
       setAppointments(value);
     }}
     className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
@@ -385,6 +389,52 @@ const updateValues = (sector, subscriptionValue) => {
     className=""
   />
 </div>
+
+{/* Cycle de Vente (en mois) */}
+<div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400 relative">
+  <div className="flex justify-between items-center">
+    <label className="text-sm font-medium text-gray-500 flex items-center">
+      Cycle de Vente (mois)
+      <TooltipProvider delayDuration={100}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="ml-2">
+              <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
+            </span>
+          </TooltipTrigger>
+          <TooltipContent className="text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
+            Durée moyenne entre la prise de contact et la signature du contrat.
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </label>
+  </div>
+
+  {/* Input affichant la valeur actuelle */}
+  <Input
+    type="number"
+    value={salesCycle}
+    onChange={(e) => {
+      let value = Number(e.target.value);
+      if (value < 1) value = 1;
+      if (value > 18) value = 18; // Max 18 mois
+      setSalesCycle(value);
+    }}
+    className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
+  />
+
+  {/* Slider pour ajuster la valeur */}
+  <Slider
+    value={[salesCycle]} 
+    min={1}
+    max={24}
+    step={1}
+    onValueChange={(value) => setSalesCycle(value[0])}
+    onPointerUp={() => document.activeElement.blur()}
+    className=""
+  />
+</div>
+
 
 <div className="mt-auto flex justify-center mt-5">
     <img src="/aveliuslogodots.png" alt="Avelius Logo" className="w-28 opacity-90" />
