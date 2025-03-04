@@ -45,11 +45,11 @@ export default function Home() {
     "Banque & Finance": { appointments: 10, closeRate: 12, contractValue: 55000, salesCycle: 6, ranges: [3, 6, 10, 15] }, 
     "Conseil en Stratégie & Management": { appointments: 8, closeRate: 18, contractValue: 80000, salesCycle: 2, ranges: [4, 7, 12, 17] }, 
     "Analyse de Données & Intelligence Artificielle": { appointments: 11, closeRate: 22, contractValue: 100000, salesCycle: 3, ranges: [5, 8, 13, 18] }, 
-    "Formation & E-learning": { appointments: 18, closeRate: 10, contractValue: 22500, salesCycle: 2, ranges: [2, 5, 8, 12] }, 
+    "Formation & E-learning": { appointments: 18, closeRate: 10, contractValue: 22500, salesCycle: 1, ranges: [2, 5, 8, 12] }, 
     "Énergies & Services Environnementaux": { appointments: 10, closeRate: 14, contractValue: 80000, salesCycle: 9, ranges: [3, 6, 11, 16] }, 
     "Événementiel & Communication": { appointments: 15, closeRate: 12, contractValue: 27500, salesCycle: 2, ranges: [3, 6, 10, 14] }, 
     "Fintech & Cryptomonnaies": { appointments: 10, closeRate: 18, contractValue: 120000, salesCycle: 3, ranges: [5, 9, 14, 20] }, 
-    "Logiciels & SaaS": { appointments: 15, closeRate: 16, contractValue: 52500, salesCycle: 2, ranges: [4, 7, 11, 15] }, 
+    "Logiciels & SaaS": { appointments: 15, closeRate: 16, contractValue: 52500, salesCycle: 1, ranges: [4, 7, 11, 15] }, 
     "Médias & Production Audiovisuelle": { appointments: 12, closeRate: 10, contractValue: 40000, salesCycle: 2, ranges: [2, 5, 9, 12] }, 
     "Marketing Digital & Publicité": { appointments: 18, closeRate: 12, contractValue: 26000, salesCycle: 2, ranges: [1, 4, 7, 10] }, 
     "Recrutement & Ressources Humaines": { appointments: 15, closeRate: 14, contractValue: 30000, salesCycle: 2, ranges: [3, 6, 10, 14] }, 
@@ -57,7 +57,7 @@ export default function Home() {
     "Industrie & Fabrication": { appointments: 10, closeRate: 13, contractValue: 50000, salesCycle: 6, ranges: [5, 8, 13, 18] },  
     "Développement Logiciel & IT": { appointments: 12, closeRate: 14, contractValue: 65000, salesCycle: 3, ranges: [3, 6, 11, 16] }, 
     "Transport & Mobilité": { appointments: 10, closeRate: 12, contractValue: 72500, salesCycle: 5, ranges: [3, 6, 11, 16] }, 
-    "SEO & Growth Marketing": { appointments: 18, closeRate: 10, contractValue: 20000, salesCycle: 2, ranges: [1, 3, 6, 9] } 
+    "SEO & Growth Marketing": { appointments: 18, closeRate: 10, contractValue: 20000, salesCycle: 1, ranges: [1, 3, 6, 9] } 
 };
   
   const DEFAULT_SECTOR = "Banque & Finance"; // 🔥 Secteur par défaut
@@ -394,7 +394,7 @@ const updateValues = (sector, subscriptionValue) => {
 <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400 relative">
   <div className="flex justify-between items-center">
     <label className="text-sm font-medium text-gray-500 flex items-center">
-      Cycle de Vente (mois)
+      Cycle de vente (mois)
       <TooltipProvider delayDuration={100}>
         <Tooltip>
           <TooltipTrigger asChild>
