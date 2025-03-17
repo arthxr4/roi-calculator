@@ -158,7 +158,7 @@ const updateValues = (sector, subscriptionValue) => {
   }, [salesPerYear, investment, roi, api]);
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-transparent">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-transparent p-4">
       <div className="bg-white p-0 rounded-xl shadow-md w-full max-w-5xl grid grid-cols-1 md:grid-cols-[65%_35%] gap-0">
         {/* Partie Gauche - Formulaire */}
         
