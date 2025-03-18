@@ -92,7 +92,6 @@ const [selectedSector, setSelectedSector] = useState(DEFAULT_SECTOR);
 const [appointments, setAppointments] = useState(SECTOR_DATA[DEFAULT_SECTOR].appointments);
 const [closeRate, setCloseRate] = useState(SECTOR_DATA[DEFAULT_SECTOR].closeRate);
 const [contractValue, setContractValue] = useState(SECTOR_DATA[DEFAULT_SECTOR].contractValue);
-const [salesCycle, setSalesCycle] = useState(6); // 6 mois par défaut
 
 const [isFocused, setIsFocused] = useState(false);
 const [subscription, setSubscription] = useState(2500);
@@ -132,14 +131,15 @@ const updateValues = (sector, subscriptionValue) => {
     setAppointments(SECTOR_DATA[sector].appointments * multiplier);
     setCloseRate(SECTOR_DATA[sector].closeRate);
     setContractValue(SECTOR_DATA[sector].contractValue);
-    setSalesCycle(SECTOR_DATA[sector].salesCycle); // 🔥 Mettre à jour le cycle de vente
   }
 };
 
   
 
 
-  const salesPerYear = (appointments * (closeRate / 100) * contractValue * (12 / salesCycle));
+
+  const salesPerYear = appointments * (closeRate / 100) * contractValue * 12;
+
 
   const roi = ((salesPerYear - investment) / investment) * 100;
 
@@ -256,7 +256,7 @@ const updateValues = (sector, subscriptionValue) => {
     onChange={(e) => {
       let value = Number(e.target.value);
       if (value < 1) value = 1;
-      if (value > 40) value = 40;
+      if (value > 100) value = 100;
       setAppointments(value);
     }}
     className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
@@ -266,7 +266,7 @@ const updateValues = (sector, subscriptionValue) => {
   <Slider
     value={[appointments]} 
     min={1}
-    max={50}
+    max={100}
     step={1}
     onValueChange={(value) => setAppointments(value[0])}
     onPointerUp={() => document.activeElement.blur()}
@@ -382,50 +382,7 @@ const updateValues = (sector, subscriptionValue) => {
   />
 </div>
 
-{/* Cycle de Vente (en mois) */}
-<div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400 relative">
-  <div className="flex justify-between items-center">
-    <label className="text-sm font-medium text-gray-500 flex items-center">
-      Cycle de vente (mois)
-      <TooltipProvider delayDuration={100}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span className="ml-2">
-              <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
-            </span>
-          </TooltipTrigger>
-          <TooltipContent className="text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
-            Durée moyenne entre la prise de contact et la signature du contrat.
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    </label>
-  </div>
 
-  {/* Input affichant la valeur actuelle */}
-  <Input
-    type="number"
-    value={salesCycle}
-    onChange={(e) => {
-      let value = Number(e.target.value);
-      if (value < 1) value = 1;
-      if (value > 18) value = 18; // Max 18 mois
-      setSalesCycle(value);
-    }}
-    className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
-  />
-
-  {/* Slider pour ajuster la valeur */}
-  <Slider
-    value={[salesCycle]} 
-    min={1}
-    max={24}
-    step={1}
-    onValueChange={(value) => setSalesCycle(value[0])}
-    onPointerUp={() => document.activeElement.blur()}
-    className=""
-  />
-</div>
 
 
 <div className="mt-auto flex justify-center mt-5">
