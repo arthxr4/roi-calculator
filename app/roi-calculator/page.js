@@ -42,7 +42,7 @@ export default function Home() {
   }, []);
   
   const SECTOR_DATA = { 
-    "Banque & Finance": { appointments: 10, closeRate: 12, contractValue: 55000, salesCycle: 6, ranges: [3, 6, 10, 15] }, 
+    "Banque & Finance": { appointments: 10, closeRate: 20, contractValue: 55000, salesCycle: 6, ranges: [6, 10, 15, 25] }, 
     "Conseil en Stratégie & Management": { appointments: 8, closeRate: 18, contractValue: 80000, salesCycle: 2, ranges: [4, 7, 12, 17] }, 
     "Analyse de Données & Intelligence Artificielle": { appointments: 11, closeRate: 22, contractValue: 100000, salesCycle: 3, ranges: [5, 8, 13, 18] }, 
     "Formation & E-learning": { appointments: 18, closeRate: 10, contractValue: 22500, salesCycle: 2, ranges: [2, 5, 8, 12] }, 
@@ -449,9 +449,14 @@ const updateValues = (sector, subscriptionValue) => {
           </div>
 
      
-          <Button className="bg-[#ff5e00] hover:bg-[#e04b00] font-medium text-white py-5">
-          Discuter du tarif
-</Button>
+          <a href="https://calendly.com/avelius/appel-de-decouverte" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   className="w-full">
+  <Button className="w-full border border-[#fe490c] bg-[#fe490c] bg-gradient-to-t from-[#fe490c] to-[#fd622d] backdrop-blur-md text-white text-center text-base text-[15px] rounded-lg py-5 px-4 font-semibold shadow-[inset_0_1px_0.4px_#ffffff4d,inset_0_-1px_0.4px_#0000001f] transition-all duration-200 hover:brightness-110">
+    Nous contacter
+  </Button>
+</a>
 
 
           
