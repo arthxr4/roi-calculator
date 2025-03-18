@@ -146,7 +146,7 @@ const updateValues = (sector, subscriptionValue) => {
   const [springs, api] = useSprings(3, (index) => ({
     from: { number: 0 },
     number: [salesPerYear, investment, roi][index], 
-    config: { tension: 250, friction: 25 }, // ⚡️ Ajuste pour une animation fluide mais rapide
+    config: { tension: 400, friction: 15 }, // ⚡️ Ajuste pour une animation fluide mais rapide
   }));
   
 
