@@ -165,9 +165,9 @@ const updateValues = (sector, subscriptionValue) => {
         <div className="bg-[#FBFBFB] p-6 md:p-8 rounded-t-xl md:rounded-none md:rounded-l-xl">
        
 
-          <h2 className="text-sm font-medium text-gray-500 mb-2">
+          <p className="text-sm font-medium text-gray-500 mb-2">
             Choisissez votre abonnement
-          </h2>
+          </p>
 
           
       
@@ -441,7 +441,7 @@ const updateValues = (sector, subscriptionValue) => {
           
       
           <div className="border-b pb-9">
-            <h3 className="text-sm font-normal text-gray-800 mb-2">Vos ventes annuelles</h3>
+            <p className="text-sm font-normal text-gray-800 mb-2">Vos ventes annuelles</p>
             <p className="text-3xl font-bold text-black md:text-4xl">
     <animated.span>
       {springs[0].number.to((n) => Math.round(n).toLocaleString("fr-FR"))}
@@ -454,7 +454,7 @@ const updateValues = (sector, subscriptionValue) => {
 
           {/* Bloc "Votre investissement annuel" avec tooltip */}
 <div className="border-b pb-9 pt-9 items-center justify-between">
-  <h3 className="text-sm font-normal text-gray-800 mb-2 flex items-center">
+  <p className="text-sm font-normal text-gray-800 mb-2 flex items-center">
     Votre investissement annuel
     {/* Icône + Tooltip */}
     <TooltipProvider delayDuration={100}>
@@ -471,7 +471,7 @@ const updateValues = (sector, subscriptionValue) => {
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
-  </h3>
+  </p>
 
   {/* Affichage du montant formaté */}
   <p className="text-3xl font-bold text-black md:text-4xl">
@@ -483,7 +483,7 @@ const updateValues = (sector, subscriptionValue) => {
 
 
           <div className=" pb-9 pt-9">
-            <h3 className="text-sm font-normal text-gray-800 mb-2">Retour sur investissement</h3>
+            <p className="text-sm font-normal text-gray-800 mb-2">Retour sur investissement</p>
            <p className="text-4xl font-bold text-[#ff5e00] md:text-5xl">
     <animated.span>
       {springs[2].number.to((n) => Math.round(n).toLocaleString("fr-FR"))}
