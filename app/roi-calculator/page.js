@@ -443,9 +443,9 @@ const updateValues = (sector, subscriptionValue) => {
           <div className="border-b pb-9">
             <p className="text-sm font-normal text-gray-800 mb-2">Vos ventes annuelles</p>
             <p className="text-3xl font-bold text-black md:text-4xl">
-    <animated.span>
-      {springs[0].number.to((n) => Math.round(n).toLocaleString("fr-FR"))}
-    </animated.span> €
+            <span>
+      {Math.round(salesPerYear).toLocaleString("fr-FR")}
+    </span> €
   </p>
 
           </div>
@@ -475,9 +475,9 @@ const updateValues = (sector, subscriptionValue) => {
 
   {/* Affichage du montant formaté */}
   <p className="text-3xl font-bold text-black md:text-4xl">
-    <animated.span>
-      {springs[1].number.to((n) => Math.round(n).toLocaleString("fr-FR"))}
-    </animated.span> €
+  <span>
+      {Math.round(investment).toLocaleString("fr-FR")}
+    </span> €
   </p>
 </div>
 
