@@ -75,7 +75,7 @@ export default function Home() {
               type="number"
               value={appointments}
               onChange={(e) => setAppointments(Math.max(1, Number(e.target.value)))}
-              className="w-full h-8 font-medium mb-1 border-none bg-transparent shadow-none focus-visible:ring-0"
+              className="w-full h-8 font-medium mb-1 p-0 border-none bg-transparent shadow-none focus-visible:ring-0"
             />
             <Slider
               value={[appointments]}
@@ -108,7 +108,7 @@ export default function Home() {
               type="number"
               value={closeRate}
               onChange={(e) => setCloseRate(Math.min(100, Math.max(1, Number(e.target.value))))}
-              className="w-full h-8 font-medium mb-1 border-none bg-transparent shadow-none focus-visible:ring-0"
+              className="w-full h-8 font-medium p-0 mb-1 border-none bg-transparent shadow-none focus-visible:ring-0"
             />
             <Slider
               value={[closeRate]}
@@ -141,7 +141,7 @@ export default function Home() {
               type="number"
               value={contractValue}
               onChange={(e) => setContractValue(Math.min(100000, Math.max(1000, Number(e.target.value))))}
-              className="w-full h-8 font-medium mb-1 border-none bg-transparent shadow-none focus-visible:ring-0"
+              className="w-full h-8 font-medium p-0 mb-1 border-none bg-transparent shadow-none focus-visible:ring-0"
             />
             <Slider
               value={[contractValue]}
@@ -163,10 +163,10 @@ export default function Home() {
           <div className="border-b pb-9">
             <p className="text-sm font-normal text-gray-800 mb-2">Vos ventes mensuelles</p>
             <p className="text-3xl font-bold text-black md:text-4xl">
-              <animated.span>
-                {springs[0].number.to((n) => Math.round(n).toLocaleString("fr-FR"))}
-              </animated.span> €
-            </p>
+    <span>
+      {Math.round(salesPerMonth).toLocaleString("fr-FR")}
+    </span> €
+  </p>
           </div>
 
           <div className="border-b pb-9 pt-9">
