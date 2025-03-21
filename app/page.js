@@ -22,8 +22,8 @@ export default function Home() {
       path: "/roi-calculator-simple",
     },
     {
-      title: "ROI - Autre",
-      description: "Ajoutez d'autres calculateurs ici si nécessaire.",
+      title: "ROI - Version web",
+      description: "Calculateur ROI Abonnement - Site Web.",
       path: "/roi-calculator", // Exemple
     },
   ];
