@@ -45,7 +45,7 @@ export default function Home() {
 
   const [appointments, setAppointments] = useState(10);
   const [closeRate, setCloseRate] = useState(20);
-  const [contractValue, setContractValue] = useState(55000);
+  const [contractValue, setContractValue] = useState(10000);
   const [pricePerAppointment, setPricePerAppointment] = useState(200);
 
   const salesPerMonth = appointments * (closeRate / 100) * contractValue;
