@@ -7,24 +7,24 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   const calculators = [
     {
-      title: "ROI - Classique",
-      description: "Estimez votre retour sur investissement mensuel.",
-      path: "/roi-calculator-main",
-    },
+        title: "ROI - Abonnement",
+        description: "Version simplifiée du calculateur ROI avec abonnement.",
+        path: "/roi-calculator-simple",
+      },
     {
       title: "ROI - Cold Call",
       description: "Calcul basé sur un prix par RDV obtenu via cold call.",
       path: "/roi-calculator-cc",
     },
     {
-      title: "ROI - Simplifié",
-      description: "Version simplifiée du calculateur ROI.",
-      path: "/roi-calculator-simple",
-    },
+        title: "ROI - Classique",
+        description: "Estimez votre retour sur investissement mensuel.",
+        path: "/roi-calculator-main",
+      },
     {
       title: "ROI - Version web",
-      description: "Calculateur ROI Abonnement - Site Web.",
-      path: "/roi-calculator", // Exemple
+      description: "uniquement pour webflow",
+      path: "/roi-calculator",
     },
   ];
 
