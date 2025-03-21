@@ -25,6 +25,24 @@ export default function Home() {
     return () => window.removeEventListener("resize", sendHeight);
   }, []);
 
+
+
+  const getCloseRateLabel = (rate) => {
+    if (rate < 5) return "Très faible";
+    if (rate < 10) return "Faible";
+    if (rate < 20) return "Moyen";
+    if (rate < 30) return "Bon";
+    return "Excellent";
+  };
+  
+  const getCloseRateColor = (rate) => {
+    if (rate < 5) return "bg-red-100 text-red-600";
+    if (rate < 10) return "bg-orange-100 text-orange-600";
+    if (rate < 20) return "bg-yellow-100 text-yellow-600";
+    if (rate < 30) return "bg-green-200 text-green-700";
+    return "bg-green-100 text-green-600";
+  };
+
   const [appointments, setAppointments] = useState(10);
   const [closeRate, setCloseRate] = useState(20);
   const [contractValue, setContractValue] = useState(55000);
@@ -87,37 +105,61 @@ export default function Home() {
           </div>
 
           {/* Taux de conversion */}
-          <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full">
-            <label className="block text-sm font-medium text-gray-500 flex items-center">
-              Taux de conversion (%)
-              <TooltipProvider delayDuration={100}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span className="ml-2">
-                      <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent className="text-sm p-3 max-w-[300px]">
-                    Pourcentage de RDV qui aboutissent à une vente.
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </label>
+          <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full transition focus-within:border-gray-400 relative">
+  {/* Label + Tooltip + Indicateur */}
+  <div className="flex justify-between items-center">
+    <label className="text-sm font-medium text-gray-500 flex items-center">
+      Taux de conversion après rendez-vous (%)
+      
+      {/* Icône + Tooltip avec apparition rapide */}
+      <TooltipProvider delayDuration={100}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="ml-2">
+              <Info size={18} className="text-gray-500 hover:text-[#ff5e00]" />
+            </span>
+          </TooltipTrigger>
+          <TooltipContent className="text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
+            Très dépendant de votre secteur d'activité. Pour calculer ce pourcentage, divisez le nombre de ventes réalisées  
+            par le nombre de devis envoyés.
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </label>
 
-            <Input
-              type="number"
-              value={closeRate}
-              onChange={(e) => setCloseRate(Math.min(100, Math.max(1, Number(e.target.value))))}
-              className="w-full h-8 font-medium p-0 mb-1 border-none bg-transparent shadow-none focus-visible:ring-0"
-            />
-            <Slider
-              value={[closeRate]}
-              min={1}
-              max={100}
-              step={1}
-              onValueChange={(value) => setCloseRate(value[0])}
-            />
-          </div>
+    {/* Indicateur dynamique avec segmentation affinée */}
+    <span className={`text-xs font-medium px-2 py-1 rounded-lg transition ${getCloseRateColor(closeRate)}`}>
+  {getCloseRateLabel(closeRate)}
+</span>
+
+
+  </div>
+
+  {/* Input */}
+  <Input
+    type="number"
+    value={closeRate}
+    onChange={(e) => {
+      let value = Number(e.target.value);
+      if (value < 1) value = 1;
+      if (value > 100) value = 100;
+      setCloseRate(value);
+    }}
+    className="w-full h-8 font-medium mb-1 border-none p-0 bg-transparent shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
+  />
+
+  {/* Slider */}
+  <Slider
+    value={[closeRate]} 
+    min={1}
+    max={100}
+    step={1}
+    onValueChange={(value) => setCloseRate(value[0])}
+    onPointerUp={() => document.activeElement.blur()}
+    className=""
+  />
+</div>
+
 
           {/* Valeur contrat */}
           <div className="border border-gray-200 bg-white rounded-lg px-4 py-3 mb-4 w-full">
