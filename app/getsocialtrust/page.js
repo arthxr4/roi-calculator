@@ -50,9 +50,9 @@ export default function GetSocialTrust() {
   return (
     <div className="min-h-screen  p-4 flex flex-col items-center justify-center">
       <div className="max-w-6xl w-full">
-        <div className="grid grid-cols-1 md:grid-cols-[58%_42%] bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-[55%_44%] bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
           {/* LEFT - PACK SELECTION */}
-          <div className="bg-[#F0F4FF] p-6 md:p-8 z-0 flex flex-col gap-8">
+          <div className="bg-[#F6F6F6] p-6 md:p-8 z-0 flex flex-col gap-8 ">
   <h3 className="text-lg font-semibold text-gray-800 mb-4">
     Choose your total number of comments
   </h3>
@@ -69,7 +69,7 @@ export default function GetSocialTrust() {
             setCustomCount(null);
           }}
           className={`group relative border rounded-xl h-36 w-full flex flex-col items-center justify-center text-center transition-all duration-300 ease-in-out px-3 z-0
-            ${isSelected ? "bg-blue-50 border-blue-600 text-gray-800 ring-1 ring-blue-300" : "bg-white border-gray-200 text-gray-700 hover:border-blue-400"}`}
+            ${isSelected ? "bg-blue-50 border-blue-600 text-gray-800 ring-1 ring-blue-300" : "bg-white border-gray-200 text-gray-700 hover:bg-blue-50 hover:border-blue-400"}`}
         >
           {savings >= 10 && (
             <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded-full">
@@ -114,7 +114,7 @@ export default function GetSocialTrust() {
   </div>
 
   {/* Features block */}
-  <div className="bg-white rounded-xl p-6 mt-2">
+  <div className="bg-white rounded-xl border p-6 mt-2">
     <h4 className="text-base font-semibold text-gray-900 mb-4">Features</h4>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 text-sm text-gray-800">
       <div className="flex items-start gap-2">
