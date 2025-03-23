@@ -24,7 +24,7 @@ export default function GetSocialTrust() {
 
   const [selectedPack, setSelectedPack] = useState(PRESET_PACKS[0]);
   const [customCount, setCustomCount] = useState(null);
-  const [subscribe, setSubscribe] = useState(false);
+  const [subscribe, setSubscribe] = useState(true);
 
   const handleCustomChange = (count) => {
     setCustomCount(count);
@@ -48,13 +48,13 @@ export default function GetSocialTrust() {
   const maxAds = Math.ceil(selectedPack.comments / 10);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFF] p-4 flex flex-col items-center justify-center">
+    <div className="min-h-screen  p-4 flex flex-col items-center justify-center">
       <div className="max-w-6xl w-full">
         <div className="grid grid-cols-1 md:grid-cols-[58%_42%] bg-white rounded-xl shadow-md overflow-hidden">
           {/* LEFT - PACK SELECTION */}
           <div className="bg-[#F0F4FF] p-6 md:p-8 z-0 flex flex-col gap-8">
   <h3 className="text-lg font-semibold text-gray-800 mb-4">
-    1. Choose your total number of comments
+    Choose your total number of comments
   </h3>
 
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -76,10 +76,10 @@ export default function GetSocialTrust() {
               Save {savings}%
             </div>
           )}
-          <div className="text-xl font-semibold transition-all duration-300 group-hover:text-lg group-hover:-translate-y-1">
+          <div className="text-xl font-semibold transition-all duration-300 group-hover:text-base group-hover:-translate-y-1">
             {pack.comments.toLocaleString("en-US")} comments
           </div>
-          <div className="overflow-hidden transition-all duration-300 ease-in-out group-hover:max-h-20 max-h-0 flex flex-col items-center mt-2">
+          <div className="overflow-hidden transition-all duration-300 ease-in-out group-hover:max-h-20 max-h-0 flex flex-col items-center mt-0">
             <div className="text-sm text-gray-400 line-through">
               ${(pack.comments * 1).toFixed(2)}
             </div>
@@ -88,7 +88,7 @@ export default function GetSocialTrust() {
             </div>
           </div>
           {isSelected && (
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none bg-white px-2 text-xs text-black flex items-center gap-1">
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none bg-white px-2 text-xs text-black flex items-center gap-1 rounded-full">
               <Check className="w-4 h-4" /> Current
             </div>
           )}
@@ -173,7 +173,7 @@ export default function GetSocialTrust() {
                 </div>
               </div>
               {/* Subscription toggle */}
-              <div className="flex justify-between gap-4 mt-6">
+              {/*  <div className="flex justify-between gap-4 mt-6">
   <Button
     variant={subscribe ? "outline" : "default"}
     className="w-1/2"
@@ -188,7 +188,7 @@ export default function GetSocialTrust() {
   >
     Subscribe & save 10%
   </Button>
-</div>
+</div> */}
 
               <div className="mt-6 border border-dashed border-blue-300 bg-blue-50 text-blue-900 rounded-md p-4 text-sm">
                 <div className="flex justify-between items-center mb-1">
