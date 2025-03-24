@@ -68,36 +68,32 @@ export default function GetSocialTrust() {
             setSelectedPack(pack);
             setCustomCount(null);
           }}
-          className={`group relative border rounded-xl h-36 w-full flex flex-col items-center justify-center text-center transition-all duration-300 ease-in-out px-3 z-0
+          className={`group relative border rounded-xl h-24 w-full flex flex-col items-center justify-center text-center transition-all duration-200 ease-in-out px-3 z-0
             ${isSelected ? "bg-blue-50 border-blue-600 text-gray-800 ring-1 ring-blue-300" : "bg-white border-gray-200 text-gray-700 hover:bg-blue-50 hover:border-blue-400"}`}
         >
           {savings >= 10 && (
-            <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded-full">
-              Save {savings}%
+            <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none bg-green-100 text-green-800 text-[10px] font-medium tracking-tight px-2 py-0.5 rounded-full">
+              SAVE {savings}%
             </div>
           )}
-          <div className="text-xl font-semibold transition-all duration-300 group-hover:text-base group-hover:-translate-y-1">
+          <div className="text-lg font-semibold transition-all duration-200 group-hover:text-base group-hover:-translate-y-1">
             {pack.comments.toLocaleString("en-US")} comments
           </div>
-          <div className="overflow-hidden transition-all duration-300 ease-in-out group-hover:max-h-20 max-h-0 flex flex-col items-center mt-0">
-            <div className="text-sm text-gray-400 line-through">
-              ${(pack.comments * 1).toFixed(2)}
+          <div className="overflow-hidden transition-all duration-200 ease-in-out group-hover:max-h-20 max-h-0 flex flex-col items-center mt-0">
+            <div className="text-xs text-gray-400 line-through">
+              ${(1).toFixed(2)}
             </div>
-            <div className="text-sm font-semibold text-black">
+            <div className="text-xs font-semibold text-black">
               ${pack.pricePerComment.toFixed(2)}/comment
             </div>
           </div>
-          {isSelected && (
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none bg-white px-2 text-xs text-black flex items-center gap-1 rounded-full">
-              <Check className="w-4 h-4" /> Current
-            </div>
-          )}
+          
         </button>
       );
     })}
 
     {/* Custom input block */}
-    <div className="group relative border rounded-xl h-36 w-full flex flex-col items-center justify-center text-center transition-all duration-300 ease-in-out px-3 z-0 bg-white border-gray-200 hover:border-blue-400">
+    <div className="group relative border rounded-xl h-24 w-full flex flex-col items-center justify-center text-center transition-all duration-00 ease-in-out px-3 z-0 bg-white border-gray-200 hover:border-blue-400">
       <div className="text-sm font-medium text-gray-500 mb-2">Custom</div>
       <input
         type="number"
@@ -127,16 +123,33 @@ export default function GetSocialTrust() {
         <Check className="text-blue-500 mt-1 w-4 h-4" /> Increased social proof
       </div>
       <div className="flex items-start gap-2">
-        <Check className="text-blue-500 mt-1 w-4 h-4" /> Non-AI, natural tone
+        <Check className="text-blue-500 mt-1 w-4 h-4" /> Real profiles only
       </div>
       <div className="flex items-start gap-2">
-        <Check className="text-blue-500 mt-1 w-4 h-4" /> Non-AI, natural tone
+        <Check className="text-blue-500 mt-1 w-4 h-4" /> Persona-matched engagement
       </div>
       <div className="flex items-start gap-2">
-        <Check className="text-blue-500 mt-1 w-4 h-4" /> Non-AI, natural tone
+        <Check className="text-blue-500 mt-1 w-4 h-4" /> Fast & reliable delivery
       </div>
     </div>
+    <div className="flex items-center gap-3 flex-wrap text-sm text-gray-600 mt-6">
+  <span className="font-medium text-gray-800 mr-2">Supported languages:</span>
+  <img src="https://flagcdn.com/w80/gb.png" alt="English" className="w-6 h-4 rounded-sm" />
+  <img src="https://flagcdn.com/w80/de.png" alt="German" className="w-6 h-4 rounded-sm" />
+  <img src="https://flagcdn.com/w80/fr.png" alt="French" className="w-6 h-4 rounded-sm" />
+  <img src="https://flagcdn.com/w80/es.png" alt="Spanish" className="w-6 h-4 rounded-sm" />
+  <img src="https://flagcdn.com/w80/pt.png" alt="Portuguese" className="w-6 h-4 rounded-sm" />
+  <img src="https://flagcdn.com/w80/it.png" alt="Italian" className="w-6 h-4 rounded-sm" />
+  
+</div>
   </div>
+
+  
+
+
+
+
+
 </div>
 
 
@@ -155,7 +168,7 @@ export default function GetSocialTrust() {
                 </div>
                 <div className="flex justify-between">
                   <span>Estimated ad range</span>
-                  <span className="font-semibold">~{minAds} - {maxAds} ads</span>
+                  <span className="text-lg font-semibold">{minAds} - {maxAds} ads</span>
                 </div>
               </div>
 
