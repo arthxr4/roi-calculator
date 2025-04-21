@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSprings, animated } from "@react-spring/web";
 
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Info } from "lucide-react";
 
-export default function Home() {
+function Calculator() {
   useEffect(() => {
     const sendHeight = () => {
       const height = document.body.scrollHeight;
@@ -25,8 +25,6 @@ export default function Home() {
     window.addEventListener("resize", sendHeight);
     return () => window.removeEventListener("resize", sendHeight);
   }, []);
-
-
 
   const getCloseRateLabel = (rate) => {
     if (rate < 5) return "Très faible";
@@ -285,5 +283,13 @@ export default function Home() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Calculator />
+    </Suspense>
   );
 }
