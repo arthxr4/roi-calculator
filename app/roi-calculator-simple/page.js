@@ -1,4 +1,5 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSprings, animated } from "@react-spring/web";
 
@@ -43,10 +44,18 @@ export default function Home() {
     return "bg-green-100 text-green-600";
   };
 
-  const [appointments, setAppointments] = useState(10);
-  const [closeRate, setCloseRate] = useState(20);
-  const [contractValue, setContractValue] = useState(55000);
-  const [investment, setInvestment] = useState(2500);
+  const searchParams = useSearchParams();
+
+  const getParam = (key, fallback) => {
+    const value = searchParams.get(key);
+    return value ? Number(value) : fallback;
+  };
+  
+  const [appointments, setAppointments] = useState(() => getParam("appointments", 10));
+  const [closeRate, setCloseRate] = useState(() => getParam("closeRate", 20));
+  const [contractValue, setContractValue] = useState(() => getParam("contractValue", 55000));
+  const [investment, setInvestment] = useState(() => getParam("investment", 2500));
+  
 
   const salesPerMonth = appointments * (closeRate / 100) * contractValue;
   const roi = salesPerMonth / investment;
