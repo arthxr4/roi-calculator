@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { useSprings, animated } from "@react-spring/web";
 
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Info } from "lucide-react";
 
-export default function Home() {
+function Calculator() {
   useEffect(() => {
     const sendHeight = () => {
       const height = document.body.scrollHeight;
@@ -25,7 +26,12 @@ export default function Home() {
     return () => window.removeEventListener("resize", sendHeight);
   }, []);
 
-
+  const searchParams = useSearchParams();
+  
+  const getParam = (key, fallback) => {
+    const value = searchParams.get(key);
+    return value ? Number(value) : fallback;
+  };
 
   const getCloseRateLabel = (rate) => {
     if (rate < 5) return "Très faible";
@@ -43,30 +49,28 @@ export default function Home() {
     return "bg-green-100 text-green-600";
   };
 
-  const [appointments, setAppointments] = useState(10);
-  const [closeRate, setCloseRate] = useState(20);
-  const [contractValue, setContractValue] = useState(10000);
-  const [pricePerAppointment, setPricePerAppointment] = useState(200);
+  const [appointments, setAppointments] = useState(() => getParam("appointments", 10));
+  const [closeRate, setCloseRate] = useState(() => getParam("closeRate", 20));
+  const [contractValue, setContractValue] = useState(() => getParam("contractValue", 10000));
+  const [investment, setInvestment] = useState(() => getParam("investment", 200));
 
   const salesPerMonth = appointments * (closeRate / 100) * contractValue;
-  const investment = appointments * pricePerAppointment;
-  const roi = salesPerMonth / investment;
-
+  const totalInvestment = appointments * investment;
+  const roi = salesPerMonth / totalInvestment;
 
   const [isEditingInvestment, setIsEditingInvestment] = useState(false);
 
-
   const [springs, api] = useSprings(3, (index) => ({
     from: { number: 0 },
-    number: [salesPerMonth, investment, roi][index],
+    number: [salesPerMonth, totalInvestment, roi][index],
     config: { tension: 400, friction: 15 },
   }));
 
   useEffect(() => {
     api.start((index) => ({
-      number: [salesPerMonth, investment, roi][index],
+      number: [salesPerMonth, totalInvestment, roi][index],
     }));
-  }, [appointments, closeRate, contractValue, pricePerAppointment, api]);
+  }, [salesPerMonth, totalInvestment, roi, api]);
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#F4F4F4] p-4">
@@ -235,8 +239,8 @@ export default function Home() {
     {isEditingInvestment ? (
       <input
         type="number"
-        value={pricePerAppointment}
-        onChange={(e) => setPricePerAppointment(Number(e.target.value))}
+        value={investment}
+        onChange={(e) => setInvestment(Number(e.target.value))}
         onBlur={() => setIsEditingInvestment(false)}
         onKeyDown={(e) => {
           if (e.key === "Enter") setIsEditingInvestment(false);
@@ -249,12 +253,12 @@ export default function Home() {
         onClick={() => setIsEditingInvestment(true)}
         className="cursor-pointer hover:text-[#fe490c] transition"
       >
-        {Math.round(pricePerAppointment).toLocaleString("fr-FR")} €
+        {Math.round(investment).toLocaleString("fr-FR")} €
       </span>
     )}
   </div>
   <p className="text-sm text-gray-500 mt-2">
-    Coût total par mois : <span className="font-semibold">{(appointments * pricePerAppointment).toLocaleString("fr-FR")} €</span>
+    Coût total par mois : <span className="font-semibold">{(appointments * investment).toLocaleString("fr-FR")} €</span>
   </p>
 </div>
 
@@ -283,5 +287,13 @@ export default function Home() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Calculator />
+    </Suspense>
   );
 }

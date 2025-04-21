@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion"; // 🔥 Import Framer Motion
 import { useSpring, useSprings, animated } from "@react-spring/web"; // 🚀 Pour animer les nombres
 
@@ -26,7 +27,7 @@ import { ChevronDown } from "lucide-react";
 
 
 
-export default function Home() {
+function Calculator() {
   useEffect(() => {
     const sendHeight = () => {
       const height = document.body.scrollHeight;
@@ -60,6 +61,13 @@ export default function Home() {
     "SEO & Growth Marketing": { appointments: 18, closeRate: 10, contractValue: 20000, salesCycle: 1, ranges: [1, 3, 6, 9] } 
 };
   
+  const searchParams = useSearchParams();
+  
+  const getParam = (key, fallback) => {
+    const value = searchParams.get(key);
+    return value ? Number(value) : fallback;
+  };
+
   const DEFAULT_SECTOR = "Banque & Finance"; // 🔥 Secteur par défaut
 
 
@@ -88,16 +96,15 @@ export default function Home() {
   
 
   
-const [selectedSector, setSelectedSector] = useState(DEFAULT_SECTOR);
-const [appointments, setAppointments] = useState(SECTOR_DATA[DEFAULT_SECTOR].appointments);
-const [closeRate, setCloseRate] = useState(SECTOR_DATA[DEFAULT_SECTOR].closeRate);
-const [contractValue, setContractValue] = useState(SECTOR_DATA[DEFAULT_SECTOR].contractValue);
-const [salesCycle, setSalesCycle] = useState(6); // 6 mois par défaut
+const [selectedSector, setSelectedSector] = useState(() => searchParams.get("sector") || DEFAULT_SECTOR);
+const [appointments, setAppointments] = useState(() => getParam("appointments", SECTOR_DATA[DEFAULT_SECTOR].appointments));
+const [closeRate, setCloseRate] = useState(() => getParam("closeRate", SECTOR_DATA[DEFAULT_SECTOR].closeRate));
+const [contractValue, setContractValue] = useState(() => getParam("contractValue", SECTOR_DATA[DEFAULT_SECTOR].contractValue));
+const [salesCycle, setSalesCycle] = useState(() => getParam("salesCycle", 6));
+const [subscription, setSubscription] = useState(() => getParam("subscription", 2500));
+const [investment, setInvestment] = useState(() => getParam("investment", 30000));
 
 const [isFocused, setIsFocused] = useState(false);
-const [subscription, setSubscription] = useState(2500);
- 
-const [investment, setInvestment] = useState(30000);
 const [isAnimating, setIsAnimating] = useState(false); // Pour détecter un changement et lancer l'animation
 
 
@@ -474,7 +481,7 @@ const updateValues = (sector, subscriptionValue) => {
           </span>
         </TooltipTrigger>
         <TooltipContent className=" text-sm p-3 rounded-md shadow-md max-w-[300px] text-left">
-          Dépends de l’abonnement choisi
+          Dépends de l'abonnement choisi
           au tarif public. Les prix peuvent varier en fonction d'offres spécifiques 
           ou de conditions particulières au secteur.
         </TooltipContent>
@@ -510,5 +517,13 @@ const updateValues = (sector, subscriptionValue) => {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Calculator />
+    </Suspense>
   );
 }
