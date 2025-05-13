@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
 import { useSprings, animated } from "@react-spring/web";
 
 import { Button } from "@/components/ui/button";
@@ -26,13 +26,6 @@ function Calculator() {
     return () => window.removeEventListener("resize", sendHeight);
   }, []);
 
-  const searchParams = useSearchParams();
-
-  const getParam = (key, fallback) => {
-    const value = searchParams.get(key);
-    return value ? Number(value) : fallback;
-  };
-
   const getCloseRateLabel = (rate) => {
     if (rate < 5) return "Très faible";
     if (rate < 10) return "Faible";
@@ -49,28 +42,35 @@ function Calculator() {
     return "bg-green-100 text-green-600";
   };
 
+  const searchParams = useSearchParams();
+
+  const getParam = (key, fallback) => {
+    const value = searchParams.get(key);
+    return value ? Number(value) : fallback;
+  };
+  
   const [appointments, setAppointments] = useState(() => getParam("appointments", 10));
   const [closeRate, setCloseRate] = useState(() => getParam("closeRate", 20));
-  const [contractValue, setContractValue] = useState(() => getParam("contractValue", 10000));
-  const [investment, setInvestment] = useState(() => getParam("investment", 200));
+  const [contractValue, setContractValue] = useState(() => getParam("contractValue", 55000));
+  const [investment, setInvestment] = useState(() => getParam("investment", 2500));
+  
 
   const salesPerMonth = appointments * (closeRate / 100) * contractValue;
-  const totalInvestment = appointments * investment;
-  const roi = salesPerMonth / totalInvestment;
-
+  const roi = salesPerMonth / investment;
   const [isEditingInvestment, setIsEditingInvestment] = useState(false);
+
 
   const [springs, api] = useSprings(3, (index) => ({
     from: { number: 0 },
-    number: [salesPerMonth, totalInvestment, roi][index],
+    number: [salesPerMonth, investment, roi][index],
     config: { tension: 400, friction: 15 },
   }));
 
   useEffect(() => {
     api.start((index) => ({
-      number: [salesPerMonth, totalInvestment, roi][index],
+      number: [salesPerMonth, investment, roi][index],
     }));
-  }, [salesPerMonth, totalInvestment, roi, api]);
+  }, [salesPerMonth, investment, roi, api]);
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#F4F4F4] p-4">
@@ -220,7 +220,7 @@ function Calculator() {
 
           <div className="border-b pb-9 pt-9">
   <p className="text-sm font-normal text-gray-800 mb-2 flex items-center">
-    Prix par RDV
+    Votre investissement mensuel
     <TooltipProvider delayDuration={100}>
       <Tooltip>
         <TooltipTrigger asChild>
@@ -229,12 +229,13 @@ function Calculator() {
           </span>
         </TooltipTrigger>
         <TooltipContent className="text-sm p-3 max-w-[300px] text-left">
-          Coût unitaire pour chaque rendez-vous obtenu via appel à la performance.
+          En fonction de votre abonnement Avelius.
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
   </p>
 
+  {/* Affichage ou édition */}
   <div className="text-3xl font-bold text-black md:text-4xl">
     {isEditingInvestment ? (
       <input
@@ -257,12 +258,7 @@ function Calculator() {
       </span>
     )}
   </div>
-  <p className="text-sm text-gray-500 mt-2">
-    Coût total par mois : <span className="font-semibold">{(appointments * investment).toLocaleString("fr-FR")} €</span>
-  </p>
 </div>
-
-
 
 
           <div className="pb-9 pt-9">

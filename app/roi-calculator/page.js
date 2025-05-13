@@ -66,8 +66,8 @@ function Calculator() {
   const getParam = (key, fallback) => {
     const value = searchParams.get(key);
     return value ? Number(value) : fallback;
-  };
-
+};
+  
   const DEFAULT_SECTOR = "Banque & Finance"; // 🔥 Secteur par défaut
 
 

@@ -74,7 +74,7 @@ function Calculator() {
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#F4F4F4] p-4">
-      <div className="bg-white p-0 rounded-xl shadow-md w-full max-w-5xl grid grid-cols-1 md:grid-cols-[65%_35%] gap-0">
+      <div className="bg-white p-0 rounded-xl shadow-md w-full max-w-5xl grid grid-cols-1 md:grid-cols-[50%_50%] gap-0">
         {/* Partie Gauche */}
         <div className="bg-[#FBFBFB] p-6 md:p-8 rounded-t-xl md:rounded-none md:rounded-l-xl flex flex-col justify-between">
         <div>
