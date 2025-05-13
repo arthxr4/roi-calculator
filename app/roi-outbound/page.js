@@ -343,7 +343,7 @@ function Calculator() {
                         <li>Scraping ({toolsCost.details.emailsPerMonth} prospects) : {Math.round(toolsCost.costs.phantombuster + toolsCost.costs.scrapingCredits)}€</li>
                         <li>Enrichissement : {Math.round(toolsCost.costs.dropcontact + toolsCost.costs.enrichmentCredits)}€</li>
                         <li>Vérification emails : {Math.round(toolsCost.costs.emailVerification)}€</li>
-                        <li>CRM : {toolsCost.costs.crm}€ (gratuit)</li>
+                        
                       </ul>
                       <p className="text-xs text-gray-500 mt-2">
                         * Coûts calculés pour {toolsCost.details.emailsPerMonth} prospects/mois
