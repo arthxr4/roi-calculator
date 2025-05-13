@@ -53,16 +53,22 @@ function Calculator() {
   const [contractValue, setContractValue] = useState(() => getParam("contractValue", 2500));
   const [investment, setInvestment] = useState(() => getParam("investment", 2500));
 
-  // Nouveau state pour le nombre de RDV mensuel souhaité
-  const rdvSteps = [  0, 4, 8, 12, 16, 20,
-    26, 32, 38, 44, 50,
-    60, 70, 80, 90, 100,
-    120, 140, 160, 180, 200];
-  const [rdvSouhaite, setRdvSouhaite] = useState(20);
-  const rdvIndex = rdvSteps.findIndex(v => v === rdvSouhaite);
+  // Nouveau state pour le CA mensuel souhaité
+  const caSteps = [
+    0,
+    1000, 2000, 3000, 4000, 5000,
+    6000, 7000, 8000, 9000, 10000,
+    15000, 20000, 30000, 40000, 50000,
+    60000, 70000, 80000, 90000, 100000
+  ];
+  const [caSouhaite, setCaSouhaite] = useState(10000);
+  const caIndex = caSteps.findIndex(v => v === caSouhaite);
 
+  // Calcul du nombre de RDV nécessaires pour atteindre le CA
+  const rdvNecessaires = Math.ceil(caSouhaite / (contractValue * (closeRate / 100)));
+  
   // Calcul du nombre de prospects à contacter avec taux fixe de 1%
-  const contacts = Math.ceil(rdvSouhaite / 0.01);
+  const contacts = Math.ceil(rdvNecessaires / 0.01);
   
   // Calcul des coûts des outils de prospection
   const calculateToolsCost = () => {
@@ -77,7 +83,7 @@ function Calculator() {
       warmup: 40, // Coût fixe pour le warm-up
 
       // Outils d'envoi d'emails (coûts fixes)
-      sendingtool: 97, // Instantly pour l'envoi d'emails
+      sendingtool: 97, //  Pour l'envoi d'emails
 
       // Outils de scraping (coûts fixes + variables)
       phantombuster: 59, // Coût fixe de base
@@ -111,8 +117,8 @@ function Calculator() {
   const toolsCost = calculateToolsCost();
   
   // Résultats à droite
-  const rdvObtenus = rdvSouhaite;
-  const closed = Math.round(rdvSouhaite * (closeRate / 100));
+  const rdvObtenus = rdvNecessaires;
+  const closed = Math.round(rdvNecessaires * (closeRate / 100));
   const salesPerMonth = closed * contractValue;
   const roi = salesPerMonth / toolsCost.totalMonthlyCost;
   const [isEditingInvestment, setIsEditingInvestment] = useState(false);
@@ -157,11 +163,11 @@ function Calculator() {
         <div>
           {/* Vos objectifs */}
           <h3 className="text-xs font-semibold text-gray-400 uppercase mb-4 tracking-wider">Votre objectif</h3>
-          {/* Nombre de RDV mensuel souhaité */}
+          {/* CA mensuel souhaité */}
           <div className="space-y-2 mb-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <label className="font-medium text-standard text-base">Rendez-vous/mois</label>
+                <label className="font-medium text-standard text-base">CA mensuel</label>
                 <TooltipProvider delayDuration={100}>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -170,44 +176,44 @@ function Calculator() {
                       </span>
                     </TooltipTrigger>
                     <TooltipContent className="text-sm p-3 max-w-[300px]">
-                      Objectif de rendez-vous à obtenir chaque mois.
+                      Objectif de chiffre d'affaires mensuel à atteindre.
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               </div>
-                  <Input
-              type="number"
-              value={rdvSouhaite}
-              onChange={e => {
-                let value = Number(e.target.value);
-                if (value < 0) value = 0;
-                if (value > 200) value = 200;
-                // Snap to closest cran
-                const closest = rdvSteps.reduce((prev, curr) =>
-                  Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
-                );
-                setRdvSouhaite(closest);
-              }}
-              min={0}
-              max={200}
-              step={1}
-              className="flex h-[40px] p-sm justify-between items-center shrink-0 self-stretch font-normal text-base align-middle border border-border-light bg-white w-[75px] rounded-md text-center text-standard"
-            />
+              <Input
+                type="number"
+                value={caSouhaite}
+                onChange={e => {
+                  let value = Number(e.target.value);
+                  if (value < 0) value = 0;
+                  if (value > 100000) value = 100000;
+                  // Snap to closest cran
+                  const closest = caSteps.reduce((prev, curr) =>
+                    Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
+                  );
+                  setCaSouhaite(closest);
+                }}
+                min={0}
+                max={100000}
+                step={1000}
+                className="flex h-[40px] p-sm justify-between items-center shrink-0 self-stretch font-normal text-base align-middle border border-border-light bg-white w-[75px] rounded-md text-center text-standard"
+              />
             </div>
         
             <Slider
-              value={[rdvIndex === -1 ? 0 : rdvIndex]}
+              value={[caIndex === -1 ? 0 : caIndex]}
               min={0}
-              max={rdvSteps.length - 1}
+              max={caSteps.length - 1}
               step={1}
-              onValueChange={([idx]) => setRdvSouhaite(rdvSteps[idx])}
+              onValueChange={([idx]) => setCaSouhaite(caSteps[idx])}
             />
             <div className="mt-2 flex justify-between text-xs text-gray-500 relative h-6 px-2">
               <span className="relative"><span className="absolute left-1/2 -translate-x-1/2">0</span></span>
-              <span className="relative"><span className="absolute left-1/2 -translate-x-1/2">20</span></span>
-              <span className="relative"><span className="absolute left-1/2 -translate-x-1/2">50</span></span>
-              <span className="relative"><span className="absolute left-1/2 -translate-x-1/2">100</span></span>
-              <span className="relative"><span className="absolute left-1/2 -translate-x-1/2">200</span></span>
+              <span className="relative"><span className="absolute left-1/2 -translate-x-1/2">5k</span></span>
+              <span className="relative"><span className="absolute left-1/2 -translate-x-1/2">10k</span></span>
+              <span className="relative"><span className="absolute left-1/2 -translate-x-1/2">50k</span></span>
+              <span className="relative"><span className="absolute left-1/2 -translate-x-1/2">100k</span></span>
             </div>
           </div>
           <div className="border-b border-gray-200 mb-8" />
@@ -320,9 +326,9 @@ function Calculator() {
           {/* Lignes CA généré, Coûts outils, ROI - style carte vertical */}
         
           <div className="border-b pb-9">
-            <p className="text-sm font-normal text-gray-800 mb-2">Chiffre d'affaires généré</p>
+            <p className="text-sm font-normal text-gray-800 mb-2">Rendez-vous nécessaires</p>
             <p className="text-3xl font-bold text-black md:text-4xl">
-              {Math.round(salesPerMonth).toLocaleString("fr-FR")} €
+              {Math.round(rdvNecessaires)} RDV
             </p>
           </div>
           <div className="border-b pb-9 pt-9">
